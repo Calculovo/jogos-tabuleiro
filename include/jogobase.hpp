@@ -1,11 +1,13 @@
 #ifndef JOGO_BASE_I
 #define JOGO_BASE_I 1
 
+#include "tabuleiro.hpp"
+
 class JogoBase {
     private:
         int largura;
         int altura;
-        int** tabuleiro;
+        Tabuleiro* tabuleiro;
     public:
         JogoBase(int largura, int altura);
         ~JogoBase();
