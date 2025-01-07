@@ -6,6 +6,10 @@ typedef std::map<char, char> Legenda;
 
 #define PLAYER_1 1
 #define PLAYER_2 -1
+#define VAZIO 0
+#define EMPATE 0
+#define INDEFINIDO -64
+#define INVALID -128
 
 class Tabuleiro {
     private:
@@ -17,6 +21,7 @@ class Tabuleiro {
         Tabuleiro(int largura, int altura);
         ~Tabuleiro();
         void imprimirTabuleiro();
+        bool posicaoValida(int x, int y);
         bool colocarPeca(int x, int y, char peca);
         char lerPeca(int x, int y);
         void adicionarLegenda(char chave, char valor);

@@ -50,7 +50,12 @@ void Tabuleiro::imprimirTabuleiro() {
     }
 }
 
+bool Tabuleiro::posicaoValida(int x, int y) {
+    return (0 <= x and x < t_largura and 0 <= y and y <= t_altura);
+}
+
 bool Tabuleiro::colocarPeca(int x, int y, char peca) {
+    if (not this->posicaoValida(x,y)) return false;
     int indice = y*t_largura + x;
     if (t_matriz[indice] == peca) return false;
     t_matriz[indice] = peca;
@@ -58,6 +63,7 @@ bool Tabuleiro::colocarPeca(int x, int y, char peca) {
 }
 
 char Tabuleiro::lerPeca(int x, int y) {
+    if (not this->posicaoValida(x,y)) return INVALID;
     int indice = y*t_largura + x;
     return t_matriz[indice];
 }
