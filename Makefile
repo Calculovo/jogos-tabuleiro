@@ -13,11 +13,11 @@ obj/main.o: src/main.cpp
 obj/tabuleiro.o: src/tabuleiro.cpp include/tabuleiro.hpp
 	$(CC) $(FLAG) -c src/tabuleiro.cpp $(INCL) -o obj/tabuleiro.o
 
-obj/jogodavelha.o: src/jogodavelha.cpp obj/jogobase.o
-	$(CC) $(FLAG) -c src/jogodavelha.cpp $(INCL) -o obj/jogodavelha.o
-
-obj/jogobase.o: src/jogobase.cpp include/jogobase.hpp
+obj/jogobase.o: src/jogobase.cpp include/jogobase.hpp obj/tabuleiro.o
 	$(CC) $(FLAG) -c src/jogobase.cpp $(INCL) -o obj/jogobase.o
+
+obj/jogodavelha.o: src/jogodavelha.cpp include/jogobase.hpp obj/jogobase.o
+	$(CC) $(FLAG) -c src/jogodavelha.cpp $(INCL) -o obj/jogodavelha.o
 
 clean:
 	rm -f bin/* obj/*
@@ -31,5 +31,7 @@ obj/teste_tabuleiro.o: tests/teste_tabuleiro.cpp include/tabuleiro.hpp
 	$(CC) $(FLAG) -c tests/teste_tabuleiro.cpp $(INCL) -o obj/teste_tabuleiro.o
 
 bin/teste_jogo_da_velha: obj/teste_jogo_da_velha.o obj/jogodavelha.o
-	$(CC) $(FLAG) obj/teste_jogo_da_velha.o obj/jogodavelha.o -o bin/teste_jogo_da_velha
+	$(CC) $(FLAG) obj/teste_jogo_da_velha.o obj/jogodavelha.o obj/jogobase.o obj/tabuleiro.o -o bin/teste_jogo_da_velha
 
+obj/teste_jogo_da_velha.o: tests/teste_jogo_da_velha.cpp include/jogodavelha.hpp obj/jogodavelha.o
+	$(CC) $(FLAG) -c tests/teste_jogo_da_velha.cpp $(INCL) -o obj/teste_jogo_da_velha.o

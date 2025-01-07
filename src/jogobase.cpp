@@ -17,3 +17,13 @@ JogoBase::~JogoBase() {
 void JogoBase::imprimirTabuleiro() {
     tabuleiro->imprimirTabuleiro();
 };
+
+char JogoBase::getTurno() {
+    return turno;
+};
+
+char JogoBase::switchTurno() {
+    if (turno == PLAYER_1) turno = PLAYER_2;
+    else turno = PLAYER_1;
+    return turno;
+}

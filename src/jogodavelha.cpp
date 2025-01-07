@@ -18,6 +18,7 @@ char JogoDaVelha::validarJogada(std::string input) {
     }
     tabuleiro->colocarPeca(coluna, linha, this->getTurno());
     this->switchTurno();
+    return VALID_PLAY;
 };
 
 int JogoDaVelha::testarVitoria() {
@@ -30,7 +31,8 @@ int JogoDaVelha::testarVitoria() {
             broke = true;
             break;
         }
-        if (not broke) return tabuleiro->lerPeca(i,0);
+        if (not broke and tabuleiro->lerPeca(i,0) != VAZIO)
+            return tabuleiro->lerPeca(i,0);
     }
     //testar horizontais
     for (int j = 0; j < altura; j++) {
@@ -40,7 +42,8 @@ int JogoDaVelha::testarVitoria() {
             broke = true;
             break;
         }
-        if (not broke) return tabuleiro->lerPeca(0,j);
+        if (not broke and tabuleiro->lerPeca(0,j) != VAZIO)
+            return tabuleiro->lerPeca(0,j);
     }
     //testar diagonais
     broke = false;
@@ -49,14 +52,16 @@ int JogoDaVelha::testarVitoria() {
         broke = true;
         break;
     }
-    if (not broke) return tabuleiro->lerPeca(0,0);
+    if (not broke and tabuleiro->lerPeca(0,0) != VAZIO)
+        return tabuleiro->lerPeca(0,0);
     broke = false;
     for (int j = 1; j < altura; j++) {
         if (tabuleiro->lerPeca(j,altura-j-1) == tabuleiro->lerPeca(0,altura-1)) continue;
         broke = true;
         break;
     }
-    if (not broke) return tabuleiro->lerPeca(0,altura-1);
+    if (not broke and tabuleiro->lerPeca(0,altura-1) != VAZIO)
+        return tabuleiro->lerPeca(0,altura-1);
     //verificar se ainda eh possivel jogar
     for (int i = 0; i < largura; i++) {
         for (int j = 0; j < altura; j++) {

@@ -1,5 +1,5 @@
 #ifndef CADASTRO_I
-#define CADASTRO 1
+#define CADASTRO_I 1
 
 #include <vector>
 #include "jogador.hpp"
