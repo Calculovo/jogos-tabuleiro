@@ -15,6 +15,11 @@ Coord::Coord(std::string entrada) {
     }
     entrada[0] = '0';
     linha = std::stoi(entrada);
+    if (linha == 0) {
+        x = INVALID;
+        y = INVALID;
+        return;
+    }
     x = coluna;
     y = linha-1;
 };
