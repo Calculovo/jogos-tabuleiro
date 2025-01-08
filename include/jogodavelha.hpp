@@ -8,6 +8,7 @@ class JogoDaVelha : public JogoBase {
         JogoDaVelha();
         JogoDaVelha(int tamanho);
         char validarJogada(std::string input) override;
+        int testarReta(Coord inicial, Coord direcao, int tamanho);
         int testarVitoria() override;
 };
 

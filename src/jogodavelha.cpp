@@ -6,66 +6,56 @@ JogoDaVelha::JogoDaVelha() : JogoDaVelha(3){};
 JogoDaVelha::JogoDaVelha(int tamanho) : JogoBase(tamanho){};
 
 char JogoDaVelha::validarJogada(std::string input) {
-    int coluna = input[0]-'A';
-    int linha = input[1]-'1';
-    if (0 > coluna or coluna >= largura or 0 > linha or linha >= altura) {
+    Coord coord(input);
+    if (not tabuleiro->posicaoValida(coord)) {
         std::cout << "Digite as coordenadas sem espaco. Exemplos: A1, C3" << std::endl;
         return SYNTAX_ERROR;
     }
-    if (tabuleiro->lerPeca(coluna, linha) != VAZIO) {
+    if (tabuleiro->lerPeca(coord) != VAZIO) {
         std::cout << "Digite as coordenadas de um espaco em branco." << std::endl;
         return LOGIC_ERROR;
     }
-    tabuleiro->colocarPeca(coluna, linha, this->getTurno());
+    tabuleiro->colocarPeca(coord, this->getTurno());
     this->switchTurno();
     return VALID_PLAY;
 };
 
+int JogoDaVelha::testarReta(Coord inicial, Coord direcao, int tamanho) {
+    char meta = tabuleiro->lerPeca(inicial);
+    if (meta == VAZIO) return INDEFINIDO;
+    for (int i = 1; i < tabuleiro->getAltura(); i++) {
+        if (tabuleiro->lerPeca(inicial + direcao*i) == meta)
+            continue;
+        return INDEFINIDO;
+    }
+    return meta;
+}; 
+
 int JogoDaVelha::testarVitoria() {
-    //testar verticais
-    bool broke;
-    for (int i = 0; i < largura; i++) {
-        broke = false;
-        for (int j = 1; j < altura; j++) {
-            if (tabuleiro->lerPeca(i,j) == tabuleiro->lerPeca(i,0)) continue;
-            broke = true;
-            break;
-        }
-        if (not broke and tabuleiro->lerPeca(i,0) != VAZIO)
-            return tabuleiro->lerPeca(i,0);
+    char temp;
+    //verificar verticais
+    for (int i = 0; i < tabuleiro->getLargura(); i++) {
+        temp = testarReta(Coord(i,0), Coord(0,1), tabuleiro->getAltura());
+        if (temp == INDEFINIDO)
+            continue;
+        return temp;
     }
-    //testar horizontais
-    for (int j = 0; j < altura; j++) {
-        broke = false;
-        for (int i = 1; i < largura; i++) {
-            if (tabuleiro->lerPeca(i,j) == tabuleiro->lerPeca(0,j)) continue;
-            broke = true;
-            break;
-        }
-        if (not broke and tabuleiro->lerPeca(0,j) != VAZIO)
-            return tabuleiro->lerPeca(0,j);
+    //verificar horizontais
+    for (int i = 0; i < tabuleiro->getAltura(); i++) {
+        temp = testarReta(Coord(0,i), Coord(1,0), tabuleiro->getLargura());
+        if (temp == INDEFINIDO)
+            continue;
+        return temp;
     }
-    //testar diagonais
-    broke = false;
-    for (int j = 1; j < altura; j++) {
-        if (tabuleiro->lerPeca(j,j) == tabuleiro->lerPeca(0,0)) continue;
-        broke = true;
-        break;
-    }
-    if (not broke and tabuleiro->lerPeca(0,0) != VAZIO)
-        return tabuleiro->lerPeca(0,0);
-    broke = false;
-    for (int j = 1; j < altura; j++) {
-        if (tabuleiro->lerPeca(j,altura-j-1) == tabuleiro->lerPeca(0,altura-1)) continue;
-        broke = true;
-        break;
-    }
-    if (not broke and tabuleiro->lerPeca(0,altura-1) != VAZIO)
-        return tabuleiro->lerPeca(0,altura-1);
+    //verificar diagonais
+    temp = testarReta(Coord(0,0), Coord(1,1), tabuleiro->getAltura());
+    if (temp != INDEFINIDO) return temp;
+    temp = testarReta(Coord(0,tabuleiro->getAltura()-1), Coord(1,-1), tabuleiro->getAltura());
+    if (temp != INDEFINIDO) return temp;
     //verificar se ainda eh possivel jogar
-    for (int i = 0; i < largura; i++) {
-        for (int j = 0; j < altura; j++) {
-            if (tabuleiro->lerPeca(i,j) == VAZIO) return INDEFINIDO;
+    for (int i = 0; i < tabuleiro->getLargura(); i++) {
+        for (int j = 0; j < tabuleiro->getAltura(); j++) {
+            if (tabuleiro->lerPeca(Coord(i,j)) == VAZIO) return INDEFINIDO;
         }
     }
     return EMPATE;
