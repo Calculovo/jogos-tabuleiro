@@ -22,6 +22,9 @@ obj/jogodavelha.o: src/jogodavelha.cpp include/jogobase.hpp obj/jogobase.o
 obj/raposaeovelhas.o: src/raposaeovelhas.cpp include/jogobase.hpp obj/jogobase.o
 	$(CC) $(FLAG) -c src/raposaeovelhas.cpp $(INCL) -o obj/raposaeovelhas.o
 
+obj/damas.o: src/damas.cpp include/jogobase.hpp obj/jogobase.o
+	$(CC) $(FLAG) -c src/damas.cpp $(INCL) -o obj/damas.o
+
 clean:
 	rm -f bin/* obj/*
 
@@ -44,3 +47,9 @@ bin/teste_raposa_e_ovelhas: obj/teste_raposa_e_ovelhas.o obj/raposaeovelhas.o
 
 obj/teste_raposa_e_ovelhas.o: tests/teste_raposa_e_ovelhas.cpp include/raposaeovelhas.hpp obj/raposaeovelhas.o
 	$(CC) $(FLAG) -c tests/teste_raposa_e_ovelhas.cpp $(INCL) -o obj/teste_raposa_e_ovelhas.o
+
+bin/teste_damas.o: obj/teste_damas.o obj/raposaeovelhas.o
+	$(CC) $(FLAG) obj/teste_damas.o obj/raposaeovelhas.o obj/jogobase.o obj/tabuleiro.o -o bin/teste_damas
+
+obj/teste_damas.o: tests/teste_damas.cpp include/raposaeovelhas.hpp obj/raposaeovelhas.o
+	$(CC) $(FLAG) -c tests/teste_damas.cpp $(INCL) -o obj/teste_damas.o
