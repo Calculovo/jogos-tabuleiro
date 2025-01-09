@@ -2,9 +2,7 @@
 #include <iostream>
 
 Ligue4::Ligue4() : JogoBase(7, 6) {
-    tabuleiro->adicionarLegenda(PLAYER_1, 'X');
-    tabuleiro->adicionarLegenda(PLAYER_2, 'O');
-    tabuleiro->adicionarLegenda(VAZIO, ' ');
+    
 }
 
 char Ligue4::validarJogada(std::string input) {
