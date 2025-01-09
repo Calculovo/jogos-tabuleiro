@@ -32,7 +32,7 @@ Coord Coord::operator +(Coord p) {
     return Coord(this->x + p.getX(), this->y + p.getY());
 };
 
-Coord Coord::operator +(Coord p) {
+Coord Coord::operator -(Coord p) {
     return Coord(this->x - p.getX(), this->y - p.getY());
 };
 
