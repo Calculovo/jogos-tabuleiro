@@ -39,33 +39,17 @@ Coord Coord::operator *(int p) {
 Tabuleiro::Tabuleiro(Coord coord) :
     t_largura(coord.getX()), 
     t_altura(coord.getY()) {
-    t_legenda = new Legenda;
     t_matriz = new char[t_altura*t_largura];
     for (int i = 0; i < t_largura*t_altura; i++) {
-        t_matriz[i] = 0;
+        t_matriz[i] = VAZIO;
     }
 }
 
 Tabuleiro::~Tabuleiro() {
-    delete t_legenda;
     delete[] t_matriz;
 }
 
-char Tabuleiro::traduzir(char input) {
-    if (t_legenda->find(input) == t_legenda->end())
-        return INVALID;
-    return (*t_legenda)[input];
-}
-
 void Tabuleiro::imprimirTabuleiro() {
-    for (int i = 0; i < t_altura; i++) {
-        for (int j = 0; j < t_largura; j++) {
-            if (traduzir(this->lerPeca(j, i)) == INVALID) {
-                std::cout << "ERRO: Tabuleiro tem peca desconhecida." << std::endl;
-                return;
-            }
-        }
-    }
     std::cout << " |";
     for (int j = 0; j < t_largura; j++) {
         std::cout << (char) ('A'+j) << '|';
@@ -78,7 +62,7 @@ void Tabuleiro::imprimirTabuleiro() {
     for (int i = 0; i < t_altura; i++) {
         std::cout << (char) ('1'+i) << '|';
         for (int j = 0; j < t_largura; j++) {
-            std::cout << traduzir(this->lerPeca(j, i)) << '|';
+            std::cout << this->lerPeca(j, i) << '|';
         }
         std::cout << std::endl;
         for (int j = 0; j < t_largura+1; j++) {
@@ -106,10 +90,6 @@ char Tabuleiro::lerPeca(Coord coord) {
     if (not this->posicaoValida(coord)) return INVALID;
     int indice = coord.getY()*t_largura + coord.getX();
     return t_matriz[indice];
-}
-
-void Tabuleiro::adicionarLegenda(char chave, char valor) {
-    (*t_legenda)[chave] = valor;
 }
 
 int Tabuleiro::getAltura() {

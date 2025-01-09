@@ -1,13 +1,11 @@
 #ifndef TABULEIRO_I
 #define TABULEIRO_I 1
 
-#include <map>
 #include <string>
-typedef std::map<char, char> Legenda;
 
-#define PLAYER_1 1
-#define PLAYER_2 -1
-#define VAZIO 0
+#define PLAYER_1 'X'
+#define PLAYER_2 'O'
+#define VAZIO ' '
 #define EMPATE 0
 #define INDEFINIDO -64
 #define INVALID -128
@@ -30,7 +28,6 @@ class Tabuleiro {
         int t_largura;
         int t_altura;
         char* t_matriz;
-        Legenda* t_legenda;
     public:
         Tabuleiro(Coord coord);
         ~Tabuleiro();
@@ -39,8 +36,6 @@ class Tabuleiro {
         bool posicaoValida(Coord coord); //verifica se a coordenada esta dentro do tabuleiro
         bool colocarPeca(Coord coord, char peca); //obvio
         char lerPeca(Coord coord); //obvio
-        char traduzir(char input); //o tabuleiro eh uma matriz de char, mas por versatilidade eu implementei uma legenda que traduz os numeros da matriz para codigos ascii
-        void adicionarLegenda(char chave, char valor); //adiciona um par (numero da matriz, codigo ascii) para a legenda
         void imprimirTabuleiro(); //obvio
         //evite usar
         Tabuleiro(int largura, int altura);
