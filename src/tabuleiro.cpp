@@ -43,6 +43,10 @@ Coord Coord::operator *(int p) {
 Tabuleiro::Tabuleiro(Coord coord) :
     t_largura(coord.getX()), 
     t_altura(coord.getY()) {
+    if (t_altura > 26 or t_largura > 26 or t_altura < 1 or t_largura < 1) {
+        std::cerr << "Tabuleiros devem ter dimensao entre 1x1 e 26x26." << std::endl;
+        exit(1);
+    }
     t_matriz = new char[t_altura*t_largura];
     for (int i = 0; i < t_largura*t_altura; i++) {
         t_matriz[i] = VAZIO;
@@ -53,26 +57,33 @@ Tabuleiro::~Tabuleiro() {
     delete[] t_matriz;
 }
 
+void Tabuleiro::linhaHorizontal() {
+    if (t_altura >= 10)
+        std::cout << "-";
+    for (int j = 0; j < t_largura+1; j++) {
+        std::cout << "-+";
+    }
+    std::cout << std::endl;
+}
+
 void Tabuleiro::imprimirTabuleiro() {
+    if (t_altura >= 10)
+        std::cout << " ";
     std::cout << " |";
     for (int j = 0; j < t_largura; j++) {
         std::cout << (char) ('A'+j) << '|';
     }
     std::cout << std::endl;
-    for (int j = 0; j < t_largura+1; j++) {
-        std::cout << "-+";
-    }
-    std::cout << std::endl;
+    linhaHorizontal();
     for (int i = 0; i < t_altura; i++) {
-        std::cout << (char) ('1'+i) << '|';
+        if (i+1 < 10 and t_altura >= 10)
+            std::cout << " ";
+        std::cout << (i+1) << '|';
         for (int j = 0; j < t_largura; j++) {
             std::cout << this->lerPeca(j, i) << '|';
         }
         std::cout << std::endl;
-        for (int j = 0; j < t_largura+1; j++) {
-            std::cout << "-+";
-        }
-        std::cout << std::endl;
+        linhaHorizontal();
     }
 }
 

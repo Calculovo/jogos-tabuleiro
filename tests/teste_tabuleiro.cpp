@@ -7,10 +7,6 @@ int main() {
     std::cout << "Isto deve imprimir um tabuleiro 3x3 vazio." << std::endl;
     t.imprimirTabuleiro();
     t.colocarPeca(1, 2, PLAYER_1);
-    std::cout << "Isto deve dar erro." << std::endl;
-    t.imprimirTabuleiro();
-    t.adicionarLegenda(PLAYER_1, 'X');
-    t.adicionarLegenda(PLAYER_2, 'O');
     std::cout << "Segunda coluna, terceira linha deve ter um X." << std::endl;
     t.imprimirTabuleiro();
     t.colocarPeca(1, 1, PLAYER_1);
@@ -27,6 +23,9 @@ int main() {
         }
         std::cout << std::endl;
     }
+    Tabuleiro u(15,15);
+    std::cout << "Isto deve imprimir um tabuleiro 15x15 vazio." << std::endl;
+    u.imprimirTabuleiro();
     return 0;
 }
 

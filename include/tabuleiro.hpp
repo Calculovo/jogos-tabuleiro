@@ -29,6 +29,7 @@ class Tabuleiro {
         int t_largura;
         int t_altura;
         char* t_matriz;
+        void linhaHorizontal();
     public:
         Tabuleiro(Coord coord);
         ~Tabuleiro();

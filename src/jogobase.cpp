@@ -2,9 +2,6 @@
 
 JogoBase::JogoBase(int largura, int altura) : turno(PLAYER_1){
     tabuleiro = new Tabuleiro(largura, altura);
-    tabuleiro->adicionarLegenda(VAZIO, ' ');
-    tabuleiro->adicionarLegenda(PLAYER_1, 'X');
-    tabuleiro->adicionarLegenda(PLAYER_2, 'O');
 };
 
 JogoBase::JogoBase(int tamanho) : JogoBase(tamanho, tamanho){
