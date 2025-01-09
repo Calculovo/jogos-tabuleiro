@@ -19,6 +19,9 @@ obj/jogobase.o: src/jogobase.cpp include/jogobase.hpp obj/tabuleiro.o
 obj/jogodavelha.o: src/jogodavelha.cpp include/jogobase.hpp obj/jogobase.o
 	$(CC) $(FLAG) -c src/jogodavelha.cpp $(INCL) -o obj/jogodavelha.o
 
+obj/damas.o: src/damas.cpp include/jogobase.hpp obj/jogobase.o
+	$(CC) $(FLAG) -c src/damas.cpp $(INCL) -o obj/damas.o
+
 clean:
 	rm -f bin/* obj/*
 

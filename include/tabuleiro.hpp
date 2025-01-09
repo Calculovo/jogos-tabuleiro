@@ -20,6 +20,7 @@ class Coord {
         int getX();
         int getY();
         Coord operator +(Coord p);
+        Coord operator -(Coord p);
         Coord operator *(int p);
 };
 
