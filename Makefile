@@ -28,7 +28,7 @@ obj/damas.o: src/damas.cpp include/jogobase.hpp obj/jogobase.o
 clean:
 	rm -f bin/* obj/*
 
-testAll: bin/teste_tabuleiro bin/teste_jogo_da_velha bin/teste_raposa_e_ovelhas
+testAll: bin/teste_tabuleiro bin/teste_jogo_da_velha bin/teste_raposa_e_ovelhas bin/teste_damas
 
 bin/teste_tabuleiro: obj/teste_tabuleiro.o obj/tabuleiro.o
 	$(CC) $(FLAG) obj/teste_tabuleiro.o obj/tabuleiro.o -o bin/teste_tabuleiro
@@ -48,8 +48,8 @@ bin/teste_raposa_e_ovelhas: obj/teste_raposa_e_ovelhas.o obj/raposaeovelhas.o
 obj/teste_raposa_e_ovelhas.o: tests/teste_raposa_e_ovelhas.cpp include/raposaeovelhas.hpp obj/raposaeovelhas.o
 	$(CC) $(FLAG) -c tests/teste_raposa_e_ovelhas.cpp $(INCL) -o obj/teste_raposa_e_ovelhas.o
 
-bin/teste_damas.o: obj/teste_damas.o obj/raposaeovelhas.o
-	$(CC) $(FLAG) obj/teste_damas.o obj/raposaeovelhas.o obj/jogobase.o obj/tabuleiro.o -o bin/teste_damas
+bin/teste_damas: obj/teste_damas.o obj/damas.o
+	$(CC) $(FLAG) obj/teste_damas.o obj/damas.o obj/jogobase.o obj/tabuleiro.o -o bin/teste_damas
 
-obj/teste_damas.o: tests/teste_damas.cpp include/raposaeovelhas.hpp obj/raposaeovelhas.o
+obj/teste_damas.o: tests/teste_damas.cpp include/damas.hpp obj/damas.o
 	$(CC) $(FLAG) -c tests/teste_damas.cpp $(INCL) -o obj/teste_damas.o
