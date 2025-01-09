@@ -11,10 +11,14 @@ RaposaeOvelhas::RaposaeOvelhas(): JogoBase(8, 8){
 char RaposaeOvelhas::validarJogada(std::string input) {
     Coord destino(1, 1), origem(2,2);
     if (turno == PLAYER_1) { 
+        if (input.size()!=2) {
+            std::cout << "Digite uma coordenada válida e sem espaço. Exemplos: A1, C3." << std::endl;
+            return SYNTAX_ERROR;
+        }
         destino = Coord(input);
         if (!tabuleiro->posicaoValida(destino)) {
-        std::cout << "Digite uma coordenada válida e sem espaço. Exemplos: A1, C3." << std::endl;
-        return SYNTAX_ERROR;
+            std::cout << "Digite uma coordenada válida e sem espaço. Exemplos: A1, C3." << std::endl;
+            return SYNTAX_ERROR;
         }
         if (tabuleiro->lerPeca(destino) != ' ') {
         std::cout << "Digite as coordenadas de um espaco em branco." << std::endl;
@@ -30,16 +34,19 @@ char RaposaeOvelhas::validarJogada(std::string input) {
         }
     }
     else{
-        if (input.size()<4) return LOGIC_ERROR;
+        if (input.size()!=4) {
+            std::cout << "As coordenadas atuais da ovelha e de seu destino devem ser válidas e digitadas sem espaço. Exemplo: B2C3." << std::endl;
+            return SYNTAX_ERROR;
+        }
         origem = Coord(input.substr(0, 2));
         destino = Coord (input.substr(2, 2));
         if (!tabuleiro->posicaoValida(origem) || !tabuleiro->posicaoValida(destino)) {
-        std::cout << "As coordenadas atuais da ovelha e de seu destino devem ser válidas e digitadas sem espaço. Exemplo: B2C3." << std::endl;
-        return SYNTAX_ERROR;
+            std::cout << "As coordenadas atuais da ovelha e de seu destino devem ser válidas e digitadas sem espaço. Exemplo: B2C3." << std::endl;
+            return SYNTAX_ERROR;
         }
         if (tabuleiro->lerPeca(origem) != 'O' || tabuleiro->lerPeca(destino) != ' ') {
-        std::cout << "Digite as coordenadas de um espaço onde há uma ovelha e, em seguida, as de um espaço em branco." << std::endl;
-        return LOGIC_ERROR;
+            std::cout << "Digite as coordenadas de um espaço onde há uma ovelha e, em seguida, as de um espaço em branco." << std::endl;
+            return LOGIC_ERROR;
         }
     }
 
