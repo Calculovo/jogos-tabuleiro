@@ -3,14 +3,14 @@
 
 Damas::Damas() : JogoBase(8) {
     for (int j = 1; j <= 7; j += 2) {
-        tabuleiro->colocarPeca(Coord(0, j), PLAYER_1);
-        tabuleiro->colocarPeca(Coord(2, j), PLAYER_1);
-        tabuleiro->colocarPeca(Coord(6, j), PLAYER_2);
+        tabuleiro->colocarPeca(Coord(0, j), 'x');
+        tabuleiro->colocarPeca(Coord(2, j), 'x');
+        tabuleiro->colocarPeca(Coord(6, j), 'o');
     }
     for (int j = 0; j <= 6; j += 2) {
-        tabuleiro->colocarPeca(Coord(1, j), PLAYER_1);
-        tabuleiro->colocarPeca(Coord(5, j), PLAYER_2);
-        tabuleiro->colocarPeca(Coord(7, j), PLAYER_2);
+        tabuleiro->colocarPeca(Coord(1, j), 'x');
+        tabuleiro->colocarPeca(Coord(5, j), 'o');
+        tabuleiro->colocarPeca(Coord(7, j), 'o');
     }
 };
 
