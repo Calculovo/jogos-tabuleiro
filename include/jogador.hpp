@@ -4,14 +4,19 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 class Jogador {
     private:
-        std::string nome;
-        std::string apelido;
-        int vitorias;
+        string nome;
+        string apelido;
+        int resultados[3][5];
     public:
-        Jogador(std::string nome, std::string apelido);
+        Jogador(string nome, string apelido);
         bool operator < (Jogador outro);
+        int AddResultados(int jogo, int resultado);
+        
+        int GetResultados() const;
 };
 
 #endif
