@@ -4,12 +4,56 @@
 #include <list>
 #include <string>
 #include <iostream>
+#include <fstream>
 
-Placar::Placar() {};
+Placar::Placar() {
+    ifstream savefile;
+    savefile.open("gamestats.tsv");
+    if (!savefile.is_open()) {
+        std::cout << "Nenhum arquivo de estatisticas foi achado." << std::endl;
+        return;
+    }
+    string nome, apelido;
+    int valores[5][3];
+    while (!savefile.eof()) {
+        getline(savefile, nome, '\t');
+        getline(savefile, apelido);
+        for (int i = 0; i < N_DE_JOGOS; i++) {
+            for (int j = 0; j < N_DE_RESULTADOS; j++) {
+                savefile >> valores[i][j];
+            }
+        }
+        jogadores.push_back(Jogador(nome,apelido,valores));
+    }
+    savefile.close();
+};
 
-Placar::~Placar() {};
+Placar::~Placar() {
+    escreverArquivo();
+};
 
-void Placar::escreverArquivo() const {};
+void Placar::escreverArquivo() const {
+    ofstream savefile;
+    savefile.open("gamestats.tsv");
+    if (!savefile.is_open()) {
+        std::cout << "Erro ao tentar salvar estatisticas." << std::endl;
+        return;
+    }
+    for (Jogador p: jogadores) {
+        savefile << p.getApelido() << "\t" << p.getNome() << std::endl;
+        for (int i = 0; i < N_DE_JOGOS; i++) {
+            for (int j = 0; j < N_DE_RESULTADOS; j++) {
+                savefile << p.getResultados(i, j);
+                if (j == N_DE_RESULTADOS-1) break;
+                savefile << "\t";
+            }
+            savefile << std::endl;
+        }
+    }
+    savefile.close();
+    std::cout << "Estatisticas salvas!" << std::endl;
+    return;
+};
 
 void Placar::adicionarJogador(std::string apelido, std::string nome) {
     for (Jogador p: jogadores) {

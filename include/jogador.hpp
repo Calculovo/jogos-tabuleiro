@@ -6,10 +6,12 @@
 #define VELHA 2
 #define DAMAS 3
 #define RAPOSA 4
+#define N_DE_JOGOS 5
 
 #define VITORIA_INDICE 0
 #define EMPATE_INDICE 1
 #define DERROTA_INDICE 2
+#define N_DE_RESULTADOS 3
 
 #include <string>
 
@@ -19,12 +21,13 @@ class Jogador {
     private:
         string nome;
         string apelido;
-        int resultados[5][3];
+        int resultados[N_DE_JOGOS][N_DE_RESULTADOS];
     public:
         Jogador(string nome, string apelido);
+        Jogador(string nome, string apelido, int valores[5][3]);
         int AddResultados(int jogo, int resultado);
         
-        int GetResultados() const;
+        int getResultados(int jogo, int resultado) const;
         void imprimir() const;
         string getNome() const;
         string getApelido() const;
