@@ -10,7 +10,7 @@
 class Damas : public JogoBase {
     public:
         //! Construtor.
-        /*
+        /*!
             Inicializa o tabuleiro com peças nas posições iniciais.
         */
         Damas();
