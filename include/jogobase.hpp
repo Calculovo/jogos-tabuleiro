@@ -9,19 +9,40 @@
 
 class JogoBase {
     protected:
+        //! Tabuleiro no qual os jogos são jogados.
         Tabuleiro* tabuleiro;
+        //! Variável que conta de quem é a vez de jogar.
         char turno;
     public:
+        //! Inicializa um JogoBase com tabuleiro de altura e largura especificados.
         JogoBase(int largura, int altura);
+        //! Inicializa um JogoBase com tabuleiro quadrado de lado especificado.
         JogoBase(int tamanho);
+        //! Destrutor.
         ~JogoBase();
-        int getLargura(); //obvio
-        int getAltura(); //obvio
-        char getTurno(); //o Jogobase tem uma variavel que conta de quem eh a vez
-        char switchTurno(); //alterna a vez entre Jogador 1 e Jogador 2
-        void virtual imprimirTabuleiro(); //obvio
-        char virtual validarJogada(std::string input) = 0; //input eh o que deve ser lido do terminal, output eh um valor que explica se a jogada eh valida (use o jogo da velha como exemplo)
-        int virtual testarVitoria() = 0; //obvio eu espero
+        //! Retorna a largura do tabuleiro.
+        int getLargura();
+        //! Retorna a altura do tabuleiro.
+        int getAltura();
+        //! Retorna qual jogador deve jogar neste momento. 
+        char getTurno();
+        //! Alterna a vez entre o Jogador 1 e o Jogador 2.
+        char switchTurno();
+        //! Imprime o tabuleiro no terminal.
+        void virtual imprimirTabuleiro();
+        //! Função virtual para validar uma string de jogada.
+        /*!
+            Classes filhas devem sobrescrever essa função
+            para interpretar uma string como uma jogada e,
+            se a jogada for válida, executá-la.
+        */
+        char virtual validarJogada(std::string input) = 0;
+        //! Função virtual para verificar o vencedor de um jogo.
+        /*!
+            Classes filhas devem sobrescrever essa função
+            para ler o tabuleiro e interpretar se algum dos jogadores já ganhou.
+        */
+        int virtual testarVitoria() = 0;
 };
 
 #endif
