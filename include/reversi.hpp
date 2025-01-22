@@ -8,10 +8,11 @@ using namespace std;
 class Reversi : public JogoBase {
     public:
         Reversi();
-        void colocarPeca(string input);
-        char existeJogadaLegal();
         char validarJogada(string input) override;
+        char existeJogadaLegal();
+        void colocarPeca(string input);
         int testarVitoria() override;
+        void inverterPecas(Coord coord);
 };
 
 #endif
