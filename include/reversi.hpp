@@ -3,14 +3,13 @@
 
 #include "jogobase.hpp"
 
-using namespace std;
-
 class Reversi : public JogoBase {
     public:
         Reversi();
-        char validarJogada(string input) override;
+        bool conferirDirecoes(Coord coord);
+        char validarJogada(std::string input) override;
         char existeJogadaLegal();
-        void colocarPeca(string input);
+        void colocarPeca(std::string input);
         int testarVitoria() override;
         void inverterPecas(Coord coord);
 };

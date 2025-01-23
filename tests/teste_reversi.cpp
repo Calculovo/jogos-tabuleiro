@@ -10,12 +10,14 @@ int main() {
         cout << "Vez do jogador ";
         cout << (j.getTurno() == PLAYER_1 ? "1" : "2") << ":" << endl;
         getline(cin, entrada);
-        if (entrada == "Y"){
-            return 0;
-        }
-        j.validarJogada(entrada);
+
+        j.colocarPeca(entrada);
     }
     j.imprimirTabuleiro();
-    cout << "Player " << (j.testarVitoria() == PLAYER_1 ? "1" : "2") << " ganhou!" << endl;
+    if (j.testarVitoria() == EMPATE) {
+        cout << "Empatou." << endl;
+    }else {
+        cout << "Jogador " << (j.testarVitoria() == PLAYER_1 ? "1" : "2") << " ganhou!" << endl;
+    }
     return 0;
 }
