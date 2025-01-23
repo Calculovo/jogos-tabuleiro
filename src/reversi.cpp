@@ -1,6 +1,7 @@
 #include "reversi.hpp"
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -11,43 +12,51 @@ using namespace std;
 
 // x branca, o preta
 Reversi::Reversi() : JogoBase(TAM_TABULEIRO) {
-        tabuleiro->colocarPeca(Coord(4, 4), 'branco');
-        tabuleiro->colocarPeca(Coord(5, 5), 'branco');
-        tabuleiro->colocarPeca(Coord(4, 5), 'preto');
-        tabuleiro->colocarPeca(Coord(5, 4), 'preto');
+        tabuleiro->colocarPeca(Coord(3, 3), 'X');
+        tabuleiro->colocarPeca(Coord(4, 4), 'X');
+        tabuleiro->colocarPeca(Coord(3, 4), 'O');
+        tabuleiro->colocarPeca(Coord(4, 3), 'O');
 
         turno = PLAYER_1;
 };
 
 
 char Reversi::existeJogadaLegal() {
+        bool existe = false;
         for (int x = 0; x < TAM_TABULEIRO; ++x) {
                 for (int y = 0; y < TAM_TABULEIRO; ++y) {
-            
-            
+                        Coord cordenada(x,y);
+                        string lugar = to_string(cordenada.getX()) + to_string(cordenada.getY());
 
+                        if (validarJogada(lugar)== VALID_PLAY){
+                                existe = true;
+                                return VALID_PLAY;
+                        }
 
                 }
         }
-        cout << "Fim de jogo: Não há mais jogadas válidas!" << endl;
-        testarVitoria();
-        return INVALID;
+        if(!existe){
+                cout << "Fim de jogo: Não há mais jogadas válidas!" << endl;
+                testarVitoria();
+                return INVALID;
+        }
+        return INDEFINIDO;
 }
 
 
 char Reversi::validarJogada(string input) {
-        Coord colocarPeca (input);
+        Coord colocar = input.substr(0, 2);
 
         char oponente = (turno == PLAYER_1) ? PLAYER_2 : PLAYER_1;
         bool jogadaValida = false;
 
-        char peca = tabuleiro->lerPeca(colocarPeca);
+        char peca = tabuleiro->lerPeca(colocar);
 
-        if (peca != tabuleiro->posicaoValida(colocarPeca)) {
+        if (peca != tabuleiro->posicaoValida(colocar)) {
                 cout << "A coordenada não existe no tabuleiro" << endl;
                 return LOGIC_ERROR;
         }
-        if(tabuleiro->lerPeca(colocarPeca) != VAZIO){
+        if(tabuleiro->lerPeca(colocar) != VAZIO){
                 cout << "Essa coordenada já possui uma peça" << endl;
                 return LOGIC_ERROR;
         }
@@ -57,8 +66,8 @@ char Reversi::validarJogada(string input) {
         for (auto& direcao : direcoes) {
                 int dx = direcao[0];
                 int dy = direcao[1];
-                int x = colocarPeca.getX() + dx;
-                int y = colocarPeca.getY() + dy;
+                int x = colocar.getX() + dx;
+                int y = colocar.getY() + dy;
                 bool encontrouOponente = false;
         
                 while (tabuleiro->posicaoValida(x, y) && tabuleiro->lerPeca(x, y) == oponente) {
@@ -90,13 +99,15 @@ void Reversi::colocarPeca(string input){
 
 
 int Reversi::testarVitoria(){
-        int countX, countO;
+        int countX = 0, countO = 0;
         for (int i = 0; i < TAM_TABULEIRO; i++) {
                 for (int j = 0; j < TAM_TABULEIRO; j++) {
                 char peca = tabuleiro->lerPeca(i, j);
                 if (peca == PLAYER_1) countX++;
                 if (peca == PLAYER_2) countO++;
                 }
+                cout << "peças x: " << countX << endl;
+                cout << "peças O: " << countO << endl;
         }
         if (countO > countX) {
                 cout << "Jogador 2 venceu." << endl;
