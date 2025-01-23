@@ -36,8 +36,16 @@ Coord Coord::operator -(Coord p) {
     return Coord(this->x - p.getX(), this->y - p.getY());
 };
 
-Coord Coord::operator *(int p) {
+bool Coord::operator ==(Coord p) {
+    return (this->getX() == p.getX() && this->getY() == p.getY());
+}
+
+Coord Coord::operator *(float p) {
     return Coord(this->x * p, this->y*p);
+};
+
+Coord Coord::operator /(float p) {
+    return Coord(this->x / p, this->y/p);
 };
 
 Tabuleiro::Tabuleiro(Coord coord) :
