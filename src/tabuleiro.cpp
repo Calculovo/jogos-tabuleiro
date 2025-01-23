@@ -36,8 +36,16 @@ Coord Coord::operator -(Coord p) {
     return Coord(this->x - p.getX(), this->y - p.getY());
 };
 
-Coord Coord::operator *(int p) {
+bool Coord::operator ==(Coord p) {
+    return (this->getX() == p.getX() && this->getY() == p.getY());
+}
+
+Coord Coord::operator *(float p) {
     return Coord(this->x * p, this->y*p);
+};
+
+Coord Coord::operator /(float p) {
+    return Coord(this->x / p, this->y/p);
 };
 
 Tabuleiro::Tabuleiro(Coord coord) :
@@ -60,8 +68,9 @@ Tabuleiro::~Tabuleiro() {
 void Tabuleiro::linhaHorizontal() {
     if (t_altura >= 10)
         std::cout << "-";
-    for (int j = 0; j < t_largura+1; j++) {
-        std::cout << "-+";
+    std::cout << "-+";
+    for (int j = 0; j < t_largura; j++) {
+        std::cout << "---+";
     }
     std::cout << std::endl;
 }
@@ -71,7 +80,7 @@ void Tabuleiro::imprimirTabuleiro() {
         std::cout << " ";
     std::cout << " |";
     for (int j = 0; j < t_largura; j++) {
-        std::cout << (char) ('A'+j) << '|';
+        std::cout << ' ' << (char) ('A'+j) << ' ' << '|';
     }
     std::cout << std::endl;
     linhaHorizontal();
@@ -80,7 +89,7 @@ void Tabuleiro::imprimirTabuleiro() {
             std::cout << " ";
         std::cout << (i+1) << '|';
         for (int j = 0; j < t_largura; j++) {
-            std::cout << this->lerPeca(j, i) << '|';
+            std::cout << ' ' << this->lerPeca(j, i) << ' ' << '|';
         }
         std::cout << std::endl;
         linhaHorizontal();

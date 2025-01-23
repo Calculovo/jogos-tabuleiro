@@ -21,7 +21,9 @@ class Coord {
         int getY();
         Coord operator +(Coord p);
         Coord operator -(Coord p);
-        Coord operator *(int p);
+        Coord operator *(float p);
+        Coord operator /(float p);
+        bool operator ==(Coord p);
 };
 
 class Tabuleiro {

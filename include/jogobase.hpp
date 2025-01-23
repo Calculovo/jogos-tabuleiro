@@ -3,9 +3,9 @@
 
 #include "tabuleiro.hpp"
 #include <string>
-#define VALID_PLAY 100
-#define LOGIC_ERROR 101
-#define SYNTAX_ERROR 102
+#define VALID_PLAY 100 //! Representa uma jogada válida.
+#define LOGIC_ERROR 101 //! Representa uma jogada potencialmente válida, mas no momento não permitida.
+#define SYNTAX_ERROR 102 //! Representa uma jogada que não respeita a formatação de input.
 
 class JogoBase {
     protected:
