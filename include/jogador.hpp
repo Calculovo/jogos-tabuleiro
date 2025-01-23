@@ -1,17 +1,36 @@
 #ifndef JOGADOR_I
 #define JOGADOR 1
 
+#define REVERSI 0
+#define LIG4 1
+#define VELHA 2
+#define DAMAS 3
+#define RAPOSA 4
+#define N_DE_JOGOS 5
+
+#define VITORIA_INDICE 0
+#define EMPATE_INDICE 1
+#define DERROTA_INDICE 2
+#define N_DE_RESULTADOS 3
+
 #include <string>
-#include <vector>
+
+using namespace std;
 
 class Jogador {
     private:
-        std::string nome;
-        std::string apelido;
-        int vitorias;
+        string nome;
+        string apelido;
+        int resultados[N_DE_JOGOS][N_DE_RESULTADOS];
     public:
-        Jogador(std::string nome, std::string apelido);
-        bool operator < (Jogador outro);
+        Jogador(string nome, string apelido);
+        Jogador(string nome, string apelido, int valores[5][3]);
+        int AddResultados(int jogo, int resultado);
+        
+        int getResultados(int jogo, int resultado) const;
+        void imprimir() const;
+        string getNome() const;
+        string getApelido() const;
 };
 
 #endif

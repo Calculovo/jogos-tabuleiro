@@ -2,8 +2,7 @@
 #include <iostream>
 
 RaposaeOvelhas::RaposaeOvelhas(): JogoBase(8, 8){
-    tabuleiro->colocarPeca(Coord(0,2), 'R');
-    tabuleiro->colocarPeca(Coord(5,1), 'O');
+    tabuleiro->colocarPeca(Coord(4,7), 'R');
     for (int i=1; i<8; i+=2){
         tabuleiro->colocarPeca(Coord(i,0), 'O');
     }
@@ -12,10 +11,14 @@ RaposaeOvelhas::RaposaeOvelhas(): JogoBase(8, 8){
 char RaposaeOvelhas::validarJogada(std::string input) {
     Coord destino(1, 1), origem(2,2);
     if (turno == PLAYER_1) { 
+        if (input.size()!=2) {
+            std::cout << "Digite uma coordenada válida e sem espaço. Exemplos: A1, C3." << std::endl;
+            return SYNTAX_ERROR;
+        }
         destino = Coord(input);
         if (!tabuleiro->posicaoValida(destino)) {
-        std::cout << "Digite uma coordenada válida e sem espaco. Exemplos: A1, C3" << std::endl;
-        return SYNTAX_ERROR;
+            std::cout << "Digite uma coordenada válida e sem espaço. Exemplos: A1, C3." << std::endl;
+            return SYNTAX_ERROR;
         }
         if (tabuleiro->lerPeca(destino) != ' ') {
         std::cout << "Digite as coordenadas de um espaco em branco." << std::endl;
@@ -31,16 +34,19 @@ char RaposaeOvelhas::validarJogada(std::string input) {
         }
     }
     else{
-        if (input.size()<4) return LOGIC_ERROR;
+        if (input.size()!=4) {
+            std::cout << "As coordenadas atuais da ovelha e de seu destino devem ser válidas e digitadas sem espaço. Exemplo: B2C3." << std::endl;
+            return SYNTAX_ERROR;
+        }
         origem = Coord(input.substr(0, 2));
         destino = Coord (input.substr(2, 2));
         if (!tabuleiro->posicaoValida(origem) || !tabuleiro->posicaoValida(destino)) {
-        std::cout << "As coordenadas atuais da ovelha e de seu destino devem ser válidas e digitadas sem espaço. Exemplo: B2C3" << std::endl;
-        return SYNTAX_ERROR;
+            std::cout << "As coordenadas atuais da ovelha e de seu destino devem ser válidas e digitadas sem espaço. Exemplo: B2C3." << std::endl;
+            return SYNTAX_ERROR;
         }
         if (tabuleiro->lerPeca(origem) != 'O' || tabuleiro->lerPeca(destino) != ' ') {
-        std::cout << "Digite as coordenadas de um espaço onde há uma ovelha e, em seguida, as de um espaço em branco" << std::endl;
-        return LOGIC_ERROR;
+            std::cout << "Digite as coordenadas de um espaço onde há uma ovelha e, em seguida, as de um espaço em branco." << std::endl;
+            return LOGIC_ERROR;
         }
     }
 
@@ -50,7 +56,7 @@ char RaposaeOvelhas::validarJogada(std::string input) {
             return VALID_PLAY;
         }
         else{
-            std::cout << "A raposa so se movimenta diagonalmente, em um quadrado de distancia" << std::endl;
+            std::cout << "A raposa só se movimenta diagonalmente, em um quadrado de distância." << std::endl;
         }
     } 
     
@@ -60,7 +66,7 @@ char RaposaeOvelhas::validarJogada(std::string input) {
             return VALID_PLAY;
         }
         else{
-            std::cout << "A ovelha só se movimenta diagonalmente e para frente, em um quadrado de distância" << std::endl;
+            std::cout << "A ovelha só se movimenta diagonalmente e para frente, em um quadrado de distância." << std::endl;
         }
     }
     return LOGIC_ERROR;
@@ -68,7 +74,6 @@ char RaposaeOvelhas::validarJogada(std::string input) {
 }
 
 int RaposaeOvelhas::testarVitoria() {
-    std::cout<<"testando vitoria"<<std::endl;
     int i = 0, j = 0;
 
     while (i<8){
@@ -85,15 +90,14 @@ int RaposaeOvelhas::testarVitoria() {
         j++;
     }
 
-    bool raposapodemover=0;
     for (i=0; i < 8; i++) {
         for (j=0; j < 8; j++){
            if (tabuleiro->lerPeca(Coord(i, j)) == 'R'){
                 Coord posraposa = Coord(i, j);
-                std::cout<<"raposa encontrada"<<std::endl;
+                //std::cout<<"raposa encontrada"<<std::endl;
                 if (!movimentoValido(posraposa, Coord (i+1, j+1)) && !movimentoValido(posraposa, Coord (i-1, j+1))
                 && !movimentoValido(posraposa, Coord (i-1, j-1)) && !movimentoValido(posraposa, Coord (i+1, j-1))){
-                    return PLAYER_2;
+                return PLAYER_2;
                 }
            }
         }
@@ -107,7 +111,7 @@ void RaposaeOvelhas::imprimirTabuleiro() {
 }
 
 bool RaposaeOvelhas::moverRaposa(Coord origem, Coord destino) {
-    if (movimentoValido(origem, destino) && tabuleiro->lerPeca(destino) == ' '){
+    if (movimentoValido(origem, destino)){
         tabuleiro->colocarPeca(destino, 'R');
         tabuleiro->colocarPeca(origem, ' ');
         return true;
@@ -116,7 +120,7 @@ bool RaposaeOvelhas::moverRaposa(Coord origem, Coord destino) {
 };
 
 bool RaposaeOvelhas::moverOvelha(Coord origem, Coord destino) {
-    if (movimentoValido(origem, destino) && tabuleiro->lerPeca(destino) == ' ' && destino.getY()>origem.getY()){
+    if (movimentoValido(origem, destino) && destino.getY()>origem.getY()){
         tabuleiro->colocarPeca(destino, 'O');
         tabuleiro->colocarPeca(origem, ' ');
         return true;
@@ -125,11 +129,8 @@ bool RaposaeOvelhas::moverOvelha(Coord origem, Coord destino) {
 };
 
 bool RaposaeOvelhas::movimentoValido(Coord origem, Coord destino){
-    if (!tabuleiro->posicaoValida(destino) || !tabuleiro->posicaoValida(origem)) {
-        std::cout << "Movimento inválido: origem(" << origem.getX() << ", " << origem.getY() 
-                  << ") destino(" << destino.getX() << ", " << destino.getY() << ")" << std::endl;
-        return false;
-    }
+    if (!tabuleiro->posicaoValida(destino) || !tabuleiro->posicaoValida(origem)) return false;
+    if (tabuleiro->lerPeca(destino) != ' ') return false;
     int dx = destino.getX() - origem.getX();
     int dy = destino.getY() - origem.getY();
     return (abs(dx) == 1 && abs(dy) == 1);
