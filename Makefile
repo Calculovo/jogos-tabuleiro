@@ -25,6 +25,9 @@ obj/raposaeovelhas.o: src/raposaeovelhas.cpp include/jogobase.hpp obj/jogobase.o
 obj/damas.o: src/damas.cpp include/jogobase.hpp obj/jogobase.o
 	$(CC) $(FLAG) -c src/damas.cpp $(INCL) -o obj/damas.o
 
+obj/reversi.o: src/reversi.cpp include/jogobase.hpp obj/jogobase.o
+	$(CC) $(FLAG) -c src/reversi.cpp $(INCL) -o obj/reversi.o
+
 obj/teste_tabuleiro.o: tests/teste_tabuleiro.cpp include/tabuleiro.hpp
 	$(CC) $(FLAG) -c tests/teste_tabuleiro.cpp $(INCL) -o obj/teste_tabuleiro.o
 
@@ -42,6 +45,12 @@ obj/teste_raposa_e_ovelhas.o: tests/teste_raposa_e_ovelhas.cpp include/raposaeov
 
 bin/teste_raposa_e_ovelhas: obj/teste_raposa_e_ovelhas.o obj/raposaeovelhas.o obj/jogobase.o obj/tabuleiro.o
 	$(CC) $(FLAG) obj/teste_raposa_e_ovelhas.o obj/raposaeovelhas.o obj/jogobase.o obj/tabuleiro.o -o bin/teste_raposa_e_ovelhas
+
+obj/teste_reversi.o: tests/teste_reversi.cpp include/reversi.hpp obj/reversi.o
+	$(CC) $(FLAG) -c tests/teste_reversi.cpp $(INCL) -o obj/teste_reversi.o
+
+bin/teste_reversi: obj/teste_reversi.o obj/reversi.o obj/jogobase.o obj/tabuleiro.o
+	$(CC) $(FLAG) obj/teste_reversi.o obj/reversi.o obj/jogobase.o obj/tabuleiro.o -o bin/teste_reversi
 
 obj/teste_damas.o: tests/teste_damas.cpp include/damas.hpp obj/damas.o
 	$(CC) $(FLAG) -c tests/teste_damas.cpp $(INCL) -o obj/teste_damas.o
@@ -61,4 +70,4 @@ bin/teste_ligue4: obj/teste_ligue4.o obj/ligue4.o obj/jogobase.o obj/tabuleiro.o
 clean:
 	rm -f bin/* obj/*
 
-testAll: bin/teste_tabuleiro bin/teste_jogo_da_velha bin/teste_raposa_e_ovelhas bin/teste_damas bin/teste_ligue4
+testAll: bin/teste_tabuleiro bin/teste_jogo_da_velha bin/teste_raposa_e_ovelhas bin/teste_damas bin/teste_ligue4 bin/teste_reversi
