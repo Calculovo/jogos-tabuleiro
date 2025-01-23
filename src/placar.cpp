@@ -111,3 +111,11 @@ void Placar::listarJogadores(char modo) {
     for (Jogador &j: jogadores)
         j.imprimir();
 };
+
+Jogador* Placar::buscarJogador(std::string apelido) {
+    for (Jogador& j: jogadores) {
+        if (j.getApelido() != apelido) continue;
+        return &j;
+    }
+    return NULL;
+};

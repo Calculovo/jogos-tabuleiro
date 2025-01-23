@@ -36,6 +36,11 @@ class Placar {
             Após ordenar a lista, imprime nome, apelido e estatísticas de cada jogador.
         */
         void listarJogadores(char modo);
+        //! Da um ponteiro para o jogador com o ID dado.
+        /*!
+            Se o jogador nao existe, retorna NULL pointer.
+        */
+        Jogador* buscarJogador(std::string apelido);
 };
 
 #endif
