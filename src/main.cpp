@@ -60,7 +60,7 @@ void menuPartida(Placar placar){
     bool comando_valido = false;
     if (placar.numeroDeJogadores() < 2) {
         std::cout << "ERRO: quantidade de jogadores insuficiente." << std::endl;
-        std::cout << "São necessários, no mínimo, dois jogadores registrados para iniciar uma partida." << std::endl << std::endl;
+        std::cout << "São necessários, no mínimo, dois jogadores cadastrados para iniciar uma partida." << std::endl << std::endl;
         return;
     }
     while (!comando_valido){
@@ -82,8 +82,8 @@ void menuPartida(Placar placar){
 
         else if (comandos_existentes.find(comando_jogo) != std::string::npos){
             comando_valido = true;
-            Jogador*jogador1 = NULL;
-            Jogador*jogador2 = NULL;
+            Jogador* jogador1 = NULL;
+            Jogador* jogador2 = NULL;
 
             escolherJogador(jogador1, jogador2, apelido_p1, apelido_p2, placar);
             Partida partida; //ainda tenho que passar os parâmetros, esperando a classe partida ficar pronta
@@ -151,7 +151,7 @@ int main() {
     "Aqui, você pode jogar e se divertir com o Jogo da Velha, Reversi, Raposa e Ovelhas, Ligue 4 e Damas." << std::endl;
     std::cout << "Se você não conhece ou quer relembrar as regras de algum jogo, não se preocupe!" << 
     "Nosso programa oferece um guia completo para as regras de cada jogo. Basta consultá-las antes de começar." << std::endl << std::endl;
-    std::cout << "Para participar das partidas, você precisará registrar os jogadores. O programa também mantém" <<
+    std::cout << "Para participar das partidas, você precisará cadastrar os jogadores. O programa também mantém" <<
     " um histórico das suas vitórias e derrotas, permitindo que você acompanhe" <<
     " o desempenho de cada jogador ao longo das partidas." << std::endl << std::endl;
     std::cout <<"Chame seus amigos, desafie seus rivais e aproveite a diversão!" << std::endl << std::endl;
