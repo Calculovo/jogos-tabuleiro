@@ -3,7 +3,7 @@
 #include "jogobase.hpp"
 #include <iostream>
 
-void imprimirOpcoesJogos() {
+void imprimirOpcoesDeJogos() {
     std::cout << "V - Jogo da Velha;" << std::endl;
     std::cout << "L - Ligue 4;" << std::endl;
     std::cout << "R - Reversi;" << std::endl;
@@ -12,7 +12,7 @@ void imprimirOpcoesJogos() {
     std::cout << "M - Voltar ao Menu Principal." << std::endl;
 }
 
-void escolherJogador(Jogador* jogador1, Jogador* jogador2, string apelido_p1, string apelido_p2, Placar placar){
+void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido_p1, std::string apelido_p2, Placar& placar){
     bool jogador_valido = false;
     while (!jogador_valido){
         std::cout << "Digite o apelido do Jogador 1: ";
@@ -20,7 +20,7 @@ void escolherJogador(Jogador* jogador1, Jogador* jogador2, string apelido_p1, st
         std::cout << std::endl;
         jogador1 = placar.buscarJogador(apelido_p1);
         if (jogador1 != NULL){
-            jogador_valido == true;
+            jogador_valido = true;
         }
         else {
         std::cout << "ERRO: Jogador não existe." << std::endl;
@@ -37,7 +37,7 @@ void escolherJogador(Jogador* jogador1, Jogador* jogador2, string apelido_p1, st
         else {
             jogador2 = placar.buscarJogador(apelido_p2);
             if (jogador2 != NULL){
-                jogador_valido == true;
+                jogador_valido = true;
             }
             else {
             std::cout << "ERRO: Jogador não existe." << std::endl;
@@ -66,21 +66,22 @@ void menuPartida(Placar placar){
     while (!comando_valido){
             
         char comando_jogo;
-        string apelido_p1, apelido_p2;
-        string comandos_existentes = "VRLOD";
+        
+        std::string apelido_p1, apelido_p2;
+        std::string comandos_existentes = "VRLOD";
 
         std::cout << "Qual jogo deseja inciar?" << std::endl << std::endl;
-        imprimirOpcoesJogos();
+        imprimirOpcoesDeJogos();
         std::cout << "Digite sua escolha: ";
         std::cin >> comando_jogo;
         std::cout << std::endl << std::endl;
 
         if (comando_jogo == 'M'){
-            comando_valido == true;
+            comando_valido = true;
         }
 
         else if (comandos_existentes.find(comando_jogo) != std::string::npos){
-            comando_valido == true;
+            comando_valido = true;
             Jogador*jogador1 = NULL;
             Jogador*jogador2 = NULL;
 
@@ -102,37 +103,37 @@ void menuHelp(){
             
         char comando_help;
         std::cout << "Deseja ler as regras de qual jogo?" << std::endl << std::endl;
-        imprimirOpcoesJogos();
+        imprimirOpcoesDeJogos();
         std::cout << "Digite sua escolha: ";
         std::cin >> comando_help;
         std::cout << std::endl;
 
         if (comando_help == 'M'){
-            comando_valido == true;
+            comando_valido = true;
         }
 
         else if (comando_help == 'V'){
-            comando_valido == true;
+            comando_valido = true;
 
         }
 
         else if (comando_help == 'L'){
-            comando_valido == true;
+            comando_valido = true;
 
         }
 
         else if (comando_help == 'R'){
-            comando_valido == true;
+            comando_valido = true;
 
         }
 
         else if (comando_help == 'D'){
-            comando_valido == true;
+            comando_valido = true;
 
         }
 
         else if (comando_help == 'O'){
-            comando_valido == true;
+            comando_valido = true;
 
         }
 
@@ -145,9 +146,9 @@ void menuHelp(){
 int main() {
     Placar placar;
 
-    std::cout << "Seja bem-vindo!" << std::endl << std::endl;
+    std::cout << "Seja bem-vindo ao Fliperama!" << std::endl << std::endl;
     std::cout << "Prepare-se para mergulhar no mundo dos jogos clássicos de tabuleiro!" <<
-    "Aqui, você pode jogar e se divertir com Jogo da Velha, Reversi, Raposa e Ovelhas, Ligue 4 e Damas." << std::endl;
+    "Aqui, você pode jogar e se divertir com o Jogo da Velha, Reversi, Raposa e Ovelhas, Ligue 4 e Damas." << std::endl;
     std::cout << "Se você não conhece ou quer relembrar as regras de algum jogo, não se preocupe!" << 
     "Nosso programa oferece um guia completo para as regras de cada jogo. Basta consultá-las antes de começar." << std::endl << std::endl;
     std::cout << "Para participar das partidas, você precisará registrar os jogadores. O programa também mantém" <<
@@ -168,7 +169,7 @@ int main() {
         }
 
         else if (comando=='C'){
-            string nome, apelido;
+            std::string nome, apelido;
             std::cout << "Digite o apelido do novo jogador:";
             std::cin >> apelido;
             std::cout << std::endl;
@@ -180,8 +181,8 @@ int main() {
         }
 
         else if (comando=='R'){
-            string apelido;
-            std::cout << "Digite o apelido do jogador a ser removido";
+            std::string apelido;
+            std::cout << "Digite o apelido do jogador a ser removido:";
             std::cin >> apelido;
             std::cout << std::endl;
             
