@@ -119,3 +119,7 @@ Jogador* Placar::buscarJogador(std::string apelido) {
     }
     return NULL;
 };
+
+unsigned int Placar::numeroDeJogadores() {
+    return jogadores.size();
+};

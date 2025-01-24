@@ -41,6 +41,8 @@ class Placar {
             Se o jogador nao existe, retorna NULL pointer.
         */
         Jogador* buscarJogador(std::string apelido);
+        //! Retorna a quantidade de jogadores registrados.
+        unsigned int numeroDeJogadores();
 };
 
 #endif
