@@ -38,7 +38,7 @@ class Placar {
         void listarJogadores(char modo);
         //! Da um ponteiro para o jogador com o ID dado.
         /*!
-            Se o jogador nao existe, retorna NULL pointer.
+            Se o jogador nao existe, retorna nullptr.
         */
         Jogador* buscarJogador(std::string apelido);
         //! Retorna a quantidade de jogadores registrados.

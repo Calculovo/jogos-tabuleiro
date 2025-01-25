@@ -15,7 +15,7 @@ Placar::Placar() {
     }
     string nome, apelido;
     int valores[5][3];
-    while (!savefile.eof()) {
+    while (1) {
         getline(savefile, nome, '\t');
         getline(savefile, apelido);
         for (int i = 0; i < N_DE_JOGOS; i++) {
@@ -23,9 +23,13 @@ Placar::Placar() {
                 savefile >> valores[i][j];
             }
         }
-        jogadores.push_back(Jogador(nome,apelido,valores));
+        if (!savefile.eof())
+            jogadores.push_back(Jogador(nome,apelido,valores));
+        else
+            break;
     }
     savefile.close();
+    cout << this->numeroDeJogadores() << " jogadores encontrados." << endl << endl;
 };
 
 Placar::~Placar() {
@@ -56,8 +60,7 @@ void Placar::escreverArquivo() const {
 };
 
 void Placar::adicionarJogador(std::string apelido, std::string nome) {
-    for (Jogador p: jogadores) {
-        if (p.getApelido() != apelido) continue;
+    if (this->buscarJogador(apelido) != nullptr) {
         std::cout << "ERRO: Jogador " << apelido << " ja existe." << std::endl;
         return;
     }
@@ -108,6 +111,7 @@ void Placar::listarJogadores(char modo) {
             throw std::range_error("Modo desconhecido.");
             break;
     }
+    cout << this->numeroDeJogadores() << " jogadores encontrados." << endl << endl;
     for (Jogador &j: jogadores)
         j.imprimir();
 };
@@ -117,7 +121,7 @@ Jogador* Placar::buscarJogador(std::string apelido) {
         if (j.getApelido() != apelido) continue;
         return &j;
     }
-    return NULL;
+    return nullptr;
 };
 
 unsigned int Placar::numeroDeJogadores() {
