@@ -101,6 +101,7 @@ void menuPartida(Placar placar){
             escolherJogador(jogador1, jogador2, apelido_p1, apelido_p2, placar);
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
+            placar.escreverArquivo();
         }
         
         else {
@@ -200,16 +201,18 @@ int main() {
                 std::cout << std::endl;
 
                 placar.adicionarJogador(apelido, nome);
+                std::cout << std::endl;
                 break;
             }
 
             case 'R': {
                 std::string apelido;
-                std::cout << "Digite o apelido do jogador a ser removido:";
+                std::cout << "Digite o apelido do jogador a ser removido: ";
                 getline (cin, apelido);
                 std::cout << std::endl;
 
                 placar.removerJogador(apelido);
+                std::cout << std::endl;
                 break;
             }
 
