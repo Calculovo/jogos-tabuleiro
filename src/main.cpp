@@ -194,10 +194,10 @@ int main() {
 
             case 'C': {
                 std::string nome, apelido;
-                std::cout << "Digite o apelido do novo jogador:";
+                std::cout << "Digite o apelido do novo jogador: ";
                 getline (cin, apelido);
                 std::cout << std::endl;
-                std::cout << "Digite o nome do novo jogador:";
+                std::cout << "Digite o nome do novo jogador: ";
                 getline (cin,nome);
                 std::cout << std::endl;
 
