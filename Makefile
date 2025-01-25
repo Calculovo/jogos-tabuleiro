@@ -1,5 +1,5 @@
 CC := g++
-FLAG := -Wall -std=c++11
+FLAG := -Wall -std=c++17
 INCL := -I include
 
 all: bin/main
@@ -16,7 +16,7 @@ obj/tabuleiro.o: src/tabuleiro.cpp include/tabuleiro.hpp
 obj/jogobase.o: src/jogobase.cpp include/jogobase.hpp obj/tabuleiro.o
 	$(CC) $(FLAG) -c src/jogobase.cpp $(INCL) -o obj/jogobase.o
 
-obj/partida.o: src/partida.cpp include/partida.hpp obj/raposaeovelhas obj/damas obj/ligue4 obj/reversi obj/jogodavelha
+obj/partida.o: src/partida.cpp include/partida.hpp obj/raposaeovelhas.o obj/damas.o obj/ligue4.o obj/reversi.o obj/jogodavelha.o
 	$(CC) $(FLAG) -c src/partida.cpp $(INCL) -o obj/partida.o
 
 obj/jogador.o: src/jogador.cpp include/jogador.hpp

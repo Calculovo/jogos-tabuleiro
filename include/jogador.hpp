@@ -1,5 +1,5 @@
 #ifndef JOGADOR_I
-#define JOGADOR 1
+#define JOGADOR_I
 
 #define cREVERSI 'R'
 #define cLIG4 'L'

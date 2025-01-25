@@ -3,20 +3,25 @@
 
 Partida::Partida(char comandoJogo, Jogador* jogador1, Jogador* jogador2) : comandoJogo(comandoJogo), jogador1(jogador1), jogador2(jogador2) {
 
-    if (comandoJogo == 'V') {
-        jogo = make_unique<JogoDaVelha>();
-    }
-    else if (comandoJogo == 'R') {
-        jogo = make_unique<Reversi>();
-    }
-    else if (comandoJogo == 'L') {
-        jogo = make_unique<Ligue4>();
-    }
-    else if (comandoJogo == 'O') {
-        jogo = make_unique<RaposaeOvelhas>();
-    }
-    else if (comandoJogo == 'D') {
-        jogo = make_unique<Damas>();
+    switch (comandoJogo) {
+        case cVELHA:
+            jogo = std::make_unique<JogoDaVelha>();
+            break;
+        case cREVERSI:
+            jogo = std::make_unique<Reversi>();
+            break;
+        case cLIG4:
+            jogo = std::make_unique<Ligue4>();
+            break;
+        case cRAPOSA:
+            jogo = std::make_unique<RaposaeOvelhas>();
+            break;
+        case cDAMAS:
+            jogo = std::make_unique<Damas>();
+            break;
+        default:
+            throw invalid_argument("Jogo nao reconhecido.");
+            break;
     }
 };
 
