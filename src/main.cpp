@@ -3,6 +3,21 @@
 #include "jogobase.hpp"
 #include <iostream>
 
+void coletaCaracter(char& comando){
+    string comandoString;
+    do {
+        std::cout << "Digite sua escolha: ";
+        getline (cin, comandoString);
+        std::cout << std::endl;
+
+        if (comandoString.size() !=1){
+            std::cout << "ERRO: Comando inválido." << std::endl;
+        }
+    } while (comandoString.size() != 1);
+
+    comando = comandoString[0];
+}
+
 void imprimirOpcoesDeJogos() {
     std::cout << "V - Jogo da Velha;" << std::endl;
     std::cout << "L - Ligue 4;" << std::endl;
@@ -16,10 +31,10 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido
     bool jogadorValido = false;
     while (!jogadorValido){
         std::cout << "Digite o apelido do Jogador 1: ";
-        std::cin >> apelido_p1;
+        getline(cin, apelido_p1);
         std::cout << std::endl;
         jogador1 = placar.buscarJogador(apelido_p1);
-        if (jogador1 != NULL){
+        if (jogador1 != nullptr){
             jogadorValido = true;
         }
         else {
@@ -29,14 +44,14 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido
     jogadorValido = false;
     while (!jogadorValido){
         std::cout << "Digite o apelido do Jogador 2: ";
-        std::cin >> apelido_p2;
+        getline(cin, apelido_p2);
         std::cout << std::endl;
         if (apelido_p2 == apelido_p1){
             std::cout << "ERRO: Jogador já selecionado." << std::endl;
         }
         else {
             jogador2 = placar.buscarJogador(apelido_p2);
-            if (jogador2 != NULL){
+            if (jogador2 != nullptr){
                 jogadorValido = true;
             }
             else {
@@ -73,7 +88,7 @@ void menuPartida(Placar placar){
         std::cout << "Qual jogo deseja inciar?" << std::endl << std::endl;
         imprimirOpcoesDeJogos();
         std::cout << "Digite sua escolha: ";
-        std::cin >> comandoJogo;
+        coletaCaracter(comandoJogo);
         std::cout << std::endl << std::endl;
 
         if (comandoJogo == 'M'){
@@ -86,7 +101,7 @@ void menuPartida(Placar placar){
             Jogador* jogador2 = NULL;
 
             escolherJogador(jogador1, jogador2, apelido_p1, apelido_p2, placar);
-            Partida partida(comandoJogo, jogador1, jogador2); //ainda tenho que passar os parâmetros, esperando a classe partida ficar pronta
+            Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
         }
         
@@ -100,53 +115,53 @@ void menuHelp(){
     bool comandoValido = false;
 
     while (!comandoValido){
-            
+        
         char comandoHelp;
         std::cout << "Deseja ler as regras de qual jogo?" << std::endl << std::endl;
         imprimirOpcoesDeJogos();
-        std::cout << "Digite sua escolha: ";
-        std::cin >> comandoHelp;
-        std::cout << std::endl;
 
-        if (comandoHelp == 'M'){
-            comandoValido = true;
-        }
+        coletaCaracter(comandoHelp);
 
-        else if (comandoHelp == 'V'){
-            comandoValido = true;
+        switch (comandoHelp) {
+            case 'M':
+                comandoValido = true;
+                break;
 
-        }
+            case cVELHA:
+                comandoValido = true;
+                std::cout << "Regras a serem escritas" << std::endl;
+                break;
 
-        else if (comandoHelp == 'L'){
-            comandoValido = true;
+            case cLIG4:
+                comandoValido = true;
+                std::cout << "Regras a serem escritas" << std::endl;
+                break;
 
-        }
+            case cREVERSI:
+                std::cout << "Bem vindo às regras do REVERSI!" << std::endl;
+                std::cout << "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << std::endl;
+                std::cout << "Regras para colocar peças: Para fazer uma jogada válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente;" << std::endl;
+                std::cout << "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << std::endl;
+                std::cout << "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio." << std::endl;
+                std::cout << "Dica: seja estratégico, pense nos possíveis movimentos do seu oponente, ";
+                std::cout << "lembre que, para ganhar, o que importa é o tabuleiro final!" << std::endl;
 
-        else if (comandoHelp == 'R'){
-            std::cout<< "Bem vindo às regras do REVERSI!" << endl;
-            std::cout<< "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << endl;
-            std::cout<< "Regras para colocar peças: PAra fazer uma jogada  válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente;" << endl;
-            std::cout<< "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << endl;
-            std::cout<< "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio." << endl;
-            std::cout<< "Dica: seja estratéico, pense nos possívies movimentos do seu oponente,";
-            std::cout<< "lembre que, para ganhar, o que importa é o tabuleiro final!" << endl;
+                comandoValido = true;
+                break;
 
-            comandoValido = true;
+            case cDAMAS:
+                comandoValido = true;
+                std::cout << "Regras a serem escritas" << std::endl;
+                break;
 
-        }
+            case cRAPOSA:
+                comandoValido = true;
+                std::cout << "Regras a serem escritas" << std::endl;
+                break;
 
-        else if (comandoHelp == 'D'){
-            comandoValido = true;
-
-        }
-
-        else if (comandoHelp == 'O'){
-            comandoValido = true;
-
-        }
-
-        else {
-            std::cout << "ERRO: Comando inválido." << std::endl;
+            default:
+                std::cout << "ERRO: Comando inválido." << std::endl;
+                break;
         }
     }
 }
@@ -166,60 +181,73 @@ int main() {
 
     while(true){
     
+        string comandoString;
         char comando;
         menuPrincipal();
-        std::cout << "Digite sua escolha: ";
-        std::cin >> comando;
-        std::cout << std::endl << std::endl;
 
-        if (comando=='P'){
-            menuPartida(placar);
-        }
+        coletaCaracter(comando);
 
-        else if (comando=='C'){
-            std::string nome, apelido;
-            std::cout << "Digite o apelido do novo jogador:";
-            std::cin >> apelido;
-            std::cout << std::endl;
-            std::cout << "Digite o nome do novo jogador:";
-            std::cin >> nome;
-            std::cout << std::endl;
+        switch (comando) {
+            case 'P':
+                menuPartida(placar);
+                break;
 
-            placar.adicionarJogador(apelido, nome);
-        }
+            case 'C': {
+                std::string nome, apelido;
+                std::cout << "Digite o apelido do novo jogador:";
+                getline (cin, apelido);
+                std::cout << std::endl;
+                std::cout << "Digite o nome do novo jogador:";
+                getline (cin,nome);
+                std::cout << std::endl;
 
-        else if (comando=='R'){
-            std::string apelido;
-            std::cout << "Digite o apelido do jogador a ser removido:";
-            std::cin >> apelido;
-            std::cout << std::endl;
-            
-            placar.removerJogador(apelido);
-        }
+                placar.adicionarJogador(apelido, nome);
+                break;
+            }
 
-        else if (comando=='L'){
-            char modo;
-            std::cout << "Como deseja listar os jogadores?" << std::endl;
-            std::cout << "A - Por apelido;" <<std::endl;
-            std::cout << "N - Por nome;" <<std::endl;
-            std::cout << "Digite sua escolha:";
-            std::cin >> modo;
-            std::cout << std::endl;
+            case 'R': {
+                std::string apelido;
+                std::cout << "Digite o apelido do jogador a ser removido:";
+                getline (cin, apelido);
+                std::cout << std::endl;
 
-            placar.listarJogadores(modo);
-        }
+                placar.removerJogador(apelido);
+                break;
+            }
 
-        else if (comando=='H'){
-            menuHelp();
-        }
+            case 'L': {
+                string modoString;
+                char modo;
+                std::cout << "Como deseja listar os jogadores?" << std::endl;
+                std::cout << "A - Por apelido;" << std::endl;
+                std::cout << "N - Por nome;" << std::endl;
+                std::cout << "Digite sua escolha: ";
+                getline (cin, modoString);
+                std::cout << std::endl << std::endl;
 
-        else if (comando=='S'){
-            std::cout << "Obrigado por jogar!" << std::endl;
-            return 0;
-        }
+                if (modoString.size() !=1){
+                    std::cout << "Modo desconhecido." << std::endl;
+                    break;
+                }
 
-        else {
-            std::cout << "ERRO: Comando inválido." << std::endl;
+                modo = modoString[0];
+
+                placar.listarJogadores(modo);
+                
+                break;
+            }
+
+            case 'H':
+                menuHelp();
+                break;
+
+            case 'S':
+                std::cout << "Obrigado por jogar!" << std::endl;
+                return 0;
+
+            default:
+                std::cout << "ERRO: Comando inválido." << std::endl;
+                break;
         }
     }
     return 0;
