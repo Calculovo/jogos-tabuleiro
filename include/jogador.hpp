@@ -1,11 +1,11 @@
 #ifndef JOGADOR_I
 #define JOGADOR 1
 
-#define REVERSI 'R'
-#define LIG4 'L'
-#define VELHA 'V'
-#define DAMAS 'D'
-#define RAPOSA 'O'
+#define cREVERSI 'R'
+#define cLIG4 'L'
+#define cVELHA 'V'
+#define cDAMAS 'D'
+#define cRAPOSA 'O'
 
 #define REVERSI 0
 #define LIG4 1

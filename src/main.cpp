@@ -123,6 +123,14 @@ void menuHelp(){
         }
 
         else if (comando_help == 'R'){
+            std::cout<< "Bem vindo às regras do REVERSI!" << endl;
+            std::cout<< "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << endl;
+            std::cout<< "Regras para colocar peças: PAra fazer uma jogada  válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente;" << endl;
+            std::cout<< "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << endl;
+            std::cout<< "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio." << endl;
+            std::cout<< "Dica: seja estratéico, pense nos possívies movimentos do seu oponente,";
+            std::cout<< "lembre que, para ganhar, o que importa é o tabuleiro final!" << endl;
+
             comando_valido = true;
 
         }
