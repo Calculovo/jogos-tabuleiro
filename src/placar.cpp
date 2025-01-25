@@ -62,13 +62,13 @@ void Placar::adicionarJogador(std::string apelido, std::string nome) {
         return;
     }
     for (char c: apelido) {
-        if (('a' <= c and c <= 'z') or ('0' <= c <= '9') or (c == '_'))
+        if (('a' <= c and c <= 'z') or ('0' <= c and c <= '9') or (c == '_'))
             continue;
         std::cout << "ERRO: Apelidos de jogador somente podem usar letras minusculas, numerais, ou underline." << std::endl;
         return;
     }
     for (char c: nome) {
-        if ((' ' <= c <= '~'))
+        if ((' ' <= c and c <= '~'))
             continue;
         std::cout << "ERRO: Nomes de jogador nao podem usar caracteres de controle." << std::endl;
         return;
