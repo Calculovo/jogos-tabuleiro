@@ -25,6 +25,52 @@ Jogador::Jogador(string nome, string apelido, int valor[5][3]) : Jogador(nome,ap
     }
 }
 
+//Alterar a matriz de resultados
+void Jogador::AddResultados(char jogo, int resultado){
+    int jogoIndex;
+    
+    //Recebe o char correspondente ao jogo e transforma em um indice correspondente na matriz
+    switch (jogo) {
+        case 'R':{
+            jogoIndex = 0; 
+            break;
+        }case 'L': {
+            jogoIndex = 1;
+            break;
+        }case 'V': {
+            jogoIndex = 2; 
+            break;
+        }case 'D': {
+            jogoIndex = 3; 
+            break;
+        }case 'O': {
+            jogoIndex = 4; 
+            break;
+        }default:
+            cout << "Jogo inválido!" << endl;
+            return;
+    }
+
+    //Adiciona na matriz de resultados de acordo com o valor informado correspondente ao resultado da partida
+    if (resultado == VITORIA_INDICE) {
+        resultados[jogoIndex][0]++;
+        return;
+    } else if (resultado == EMPATE_INDICE) {
+        resultados[jogoIndex][1]++;
+        return;
+    } else if (resultado == DERROTA_INDICE) {
+        resultados[jogoIndex][2]++;
+        return;
+    } else {
+        cout << "Resultado inválido!" << endl;
+        return;
+    }
+
+    return;
+
+};
+
+
 const char* nomes[5] = {
     "REVERSI",
     "LIG4   ",
@@ -33,7 +79,7 @@ const char* nomes[5] = {
     "RAPOSA ",
 };
 
-int Jogador::getResultados(int jogo, int resultado) const {
+int Jogador::getResultados(char jogo, int resultado) const {
     return resultados[jogo][resultado];
 }
 

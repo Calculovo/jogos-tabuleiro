@@ -1,6 +1,12 @@
 #ifndef JOGADOR_I
 #define JOGADOR 1
 
+#define REVERSI 'R'
+#define LIG4 'L'
+#define VELHA 'V'
+#define DAMAS 'D'
+#define RAPOSA 'O'
+
 #define REVERSI 0
 #define LIG4 1
 #define VELHA 2
@@ -25,9 +31,9 @@ class Jogador {
     public:
         Jogador(string nome, string apelido);
         Jogador(string nome, string apelido, int valores[5][3]);
-        int AddResultados(int jogo, int resultado);
-        
-        int getResultados(int jogo, int resultado) const;
+        void AddResultados(char jogo, int resultado);
+
+        int getResultados(char jogo, int resultado) const;
         void imprimir() const;
         string getNome() const;
         string getApelido() const;

@@ -5,8 +5,6 @@
 
 #define TAM_TABULEIRO 8
 
-// x branca, o preta
-//jogador 1 x; jogador 2 o. 
 Reversi::Reversi() : JogoBase(TAM_TABULEIRO) {
         tabuleiro->colocarPeca(Coord(3, 3), 'X');
         tabuleiro->colocarPeca(Coord(4, 4), 'X');
@@ -37,7 +35,6 @@ bool Reversi::conferirDirecoes(Coord coord){
                 }
 
                 if (encontrouOponente && tabuleiro->posicaoValida(newx, newy) && tabuleiro->lerPeca(newx, newy) == turno) {
-                        //jogadaValida = true;
                         return true;
                         break; 
                 }
