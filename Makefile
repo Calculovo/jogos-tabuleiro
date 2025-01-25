@@ -16,6 +16,15 @@ obj/tabuleiro.o: src/tabuleiro.cpp include/tabuleiro.hpp
 obj/jogobase.o: src/jogobase.cpp include/jogobase.hpp obj/tabuleiro.o
 	$(CC) $(FLAG) -c src/jogobase.cpp $(INCL) -o obj/jogobase.o
 
+obj/partida.o: src/partida.cpp include/partida.hpp obj/raposaeovelhas obj/damas obj/ligue4 obj/reversi obj/jogodavelha
+	$(CC) $(FLAG) -c src/partida.cpp $(INCL) -o obj/partida.o
+
+obj/jogador.o: src/jogador.cpp include/jogador.hpp
+	$(CC) $(FLAG) -c src/jogador.cpp $(INCL) -o obj/jogador.o
+
+obj/placar.o: src/placar.cpp include/placar.hpp obj/jogador.o
+	$(CC) $(FLAG) -c src/placar.cpp $(INCL) -o obj/placar.o
+
 obj/jogodavelha.o: src/jogodavelha.cpp include/jogobase.hpp obj/jogobase.o
 	$(CC) $(FLAG) -c src/jogodavelha.cpp $(INCL) -o obj/jogodavelha.o
 
