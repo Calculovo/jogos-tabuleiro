@@ -13,9 +13,9 @@ Placar::Placar() {
         std::cout << "Nenhum arquivo de estatisticas foi achado." << std::endl;
         return;
     }
-    string nome, apelido;
+    string nome, apelido, wipe;
     int valores[5][3];
-    while (1) {
+    while (!savefile.eof()) {
         getline(savefile, nome, '\t');
         getline(savefile, apelido);
         for (int i = 0; i < N_DE_JOGOS; i++) {
@@ -23,6 +23,7 @@ Placar::Placar() {
                 savefile >> valores[i][j];
             }
         }
+        getline(savefile, wipe);
         if (!savefile.eof())
             jogadores.push_back(Jogador(nome,apelido,valores));
         else
@@ -44,7 +45,7 @@ void Placar::escreverArquivo() const {
         return;
     }
     for (Jogador p: jogadores) {
-        savefile << p.getApelido() << "\t" << p.getNome() << std::endl;
+        savefile << p.getNome() << "\t" << p.getApelido() << std::endl;
         for (int i = 0; i < N_DE_JOGOS; i++) {
             for (int j = 0; j < N_DE_RESULTADOS; j++) {
                 savefile << p.getResultados(i, j);
@@ -112,8 +113,11 @@ void Placar::listarJogadores(char modo) {
             break;
     }
     cout << this->numeroDeJogadores() << " jogadores encontrados." << endl << endl;
-    for (Jogador &j: jogadores)
+    for (Jogador &j: jogadores) {
         j.imprimir();
+        for (char c: j.getNome())
+            cout << c << "\t" << (int) c << endl;
+    };
 };
 
 Jogador* Placar::buscarJogador(std::string apelido) {
