@@ -24,7 +24,7 @@ void imprimirOpcoesDeJogos() {
     std::cout << "R - Reversi;" << std::endl;
     std::cout << "O - Raposa e Ovelhas;" << std::endl;
     std::cout << "D - Damas;" << std::endl;
-    std::cout << "M - Voltar ao Menu Principal." << std::endl;
+    std::cout << "M - Voltar ao Menu Principal." << std::endl << std::endl;
 }
 
 void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido_p1, std::string apelido_p2, Placar& placar){
@@ -87,9 +87,7 @@ void menuPartida(Placar placar){
 
         std::cout << "Qual jogo deseja inciar?" << std::endl << std::endl;
         imprimirOpcoesDeJogos();
-        std::cout << "Digite sua escolha: ";
         coletaCaracter(comandoJogo);
-        std::cout << std::endl << std::endl;
 
         if (comandoJogo == 'M'){
             comandoValido = true;
@@ -216,21 +214,12 @@ int main() {
             }
 
             case 'L': {
-                string modoString;
                 char modo;
                 std::cout << "Como deseja listar os jogadores?" << std::endl;
                 std::cout << "A - Por apelido;" << std::endl;
-                std::cout << "N - Por nome;" << std::endl;
+                std::cout << "N - Por nome;" << std::endl << std::endl;
                 std::cout << "Digite sua escolha: ";
-                getline (cin, modoString);
-                std::cout << std::endl << std::endl;
-
-                if (modoString.size() !=1){
-                    std::cout << "Modo desconhecido." << std::endl;
-                    break;
-                }
-
-                modo = modoString[0];
+                coletaCaracter(modo);
 
                 placar.listarJogadores(modo);
                 
