@@ -4,10 +4,10 @@ INCL := -I include
 
 all: bin/main
 
-bin/main: obj/main.o
-	$(CC) $(FLAG) obj/main.o -o bin/main
+bin/main: obj/main.o obj/damas.o obj/raposaeovelhas.o obj/reversi.o obj/ligue4.o obj/jogodavelha.o obj/placar.o obj/partida.o obj/jogador.o obj/jogobase.o obj/tabuleiro.o
+	$(CC) $(FLAG) obj/main.o obj/damas.o obj/raposaeovelhas.o obj/reversi.o obj/ligue4.o obj/jogodavelha.o obj/placar.o obj/partida.o obj/jogador.o obj/jogobase.o obj/tabuleiro.o -o bin/main
 
-obj/main.o: src/main.cpp
+obj/main.o: src/main.cpp include/partida.hpp obj/partida.o include/placar.hpp obj/placar.o include/jogobase.hpp obj/jogobase.o
 	$(CC) $(FLAG) -c src/main.cpp $(INCL) -o obj/main.o
 
 obj/tabuleiro.o: src/tabuleiro.cpp include/tabuleiro.hpp
