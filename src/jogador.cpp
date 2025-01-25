@@ -26,7 +26,7 @@ Jogador::Jogador(string nome, string apelido, int valor[5][3]) : Jogador(nome,ap
 }
 
 //Alterar a matriz de resultados
-void Jogador::AddResultados(char jogo, int resultado){
+void Jogador::addResultados(char jogo, int resultado){
     int jogoIndex;
     
     //Recebe o char correspondente ao jogo e transforma em um indice correspondente na matriz

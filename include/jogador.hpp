@@ -31,7 +31,7 @@ class Jogador {
     public:
         Jogador(string nome, string apelido);
         Jogador(string nome, string apelido, int valores[5][3]);
-        void AddResultados(char jogo, int resultado);
+        void addResultados(char jogo, int resultado);
 
         int getResultados(char jogo, int resultado) const;
         void imprimir() const;
