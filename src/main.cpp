@@ -13,21 +13,21 @@ void imprimirOpcoesDeJogos() {
 }
 
 void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido_p1, std::string apelido_p2, Placar& placar){
-    bool jogador_valido = false;
-    while (!jogador_valido){
+    bool jogadorValido = false;
+    while (!jogadorValido){
         std::cout << "Digite o apelido do Jogador 1: ";
         std::cin >> apelido_p1;
         std::cout << std::endl;
         jogador1 = placar.buscarJogador(apelido_p1);
         if (jogador1 != NULL){
-            jogador_valido = true;
+            jogadorValido = true;
         }
         else {
         std::cout << "ERRO: Jogador não existe." << std::endl;
         }
     }
-    jogador_valido = false;
-    while (!jogador_valido){
+    jogadorValido = false;
+    while (!jogadorValido){
         std::cout << "Digite o apelido do Jogador 2: ";
         std::cin >> apelido_p2;
         std::cout << std::endl;
@@ -37,7 +37,7 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido
         else {
             jogador2 = placar.buscarJogador(apelido_p2);
             if (jogador2 != NULL){
-                jogador_valido = true;
+                jogadorValido = true;
             }
             else {
             std::cout << "ERRO: Jogador não existe." << std::endl;
@@ -57,36 +57,36 @@ void menuPrincipal() {
 }
 
 void menuPartida(Placar placar){
-    bool comando_valido = false;
+    bool comandoValido = false;
     if (placar.numeroDeJogadores() < 2) {
         std::cout << "ERRO: quantidade de jogadores insuficiente." << std::endl;
         std::cout << "São necessários, no mínimo, dois jogadores cadastrados para iniciar uma partida." << std::endl << std::endl;
         return;
     }
-    while (!comando_valido){
+    while (!comandoValido){
             
-        char comando_jogo;
+        char comandoJogo;
         
         std::string apelido_p1, apelido_p2;
-        std::string comandos_existentes = "VRLOD";
+        std::string comandosExistentes = "VRLOD";
 
         std::cout << "Qual jogo deseja inciar?" << std::endl << std::endl;
         imprimirOpcoesDeJogos();
         std::cout << "Digite sua escolha: ";
-        std::cin >> comando_jogo;
+        std::cin >> comandoJogo;
         std::cout << std::endl << std::endl;
 
-        if (comando_jogo == 'M'){
-            comando_valido = true;
+        if (comandoJogo == 'M'){
+            comandoValido = true;
         }
 
-        else if (comandos_existentes.find(comando_jogo) != std::string::npos){
-            comando_valido = true;
+        else if (comandosExistentes.find(comandoJogo) != std::string::npos){
+            comandoValido = true;
             Jogador* jogador1 = NULL;
             Jogador* jogador2 = NULL;
 
             escolherJogador(jogador1, jogador2, apelido_p1, apelido_p2, placar);
-            Partida partida; //ainda tenho que passar os parâmetros, esperando a classe partida ficar pronta
+            Partida partida(comandoJogo, jogador1, jogador2); //ainda tenho que passar os parâmetros, esperando a classe partida ficar pronta
             partida.jogar();
         }
         
@@ -97,32 +97,32 @@ void menuPartida(Placar placar){
 }
 
 void menuHelp(){
-    bool comando_valido = false;
+    bool comandoValido = false;
 
-    while (!comando_valido){
+    while (!comandoValido){
             
-        char comando_help;
+        char comandoHelp;
         std::cout << "Deseja ler as regras de qual jogo?" << std::endl << std::endl;
         imprimirOpcoesDeJogos();
         std::cout << "Digite sua escolha: ";
-        std::cin >> comando_help;
+        std::cin >> comandoHelp;
         std::cout << std::endl;
 
-        if (comando_help == 'M'){
-            comando_valido = true;
+        if (comandoHelp == 'M'){
+            comandoValido = true;
         }
 
-        else if (comando_help == 'V'){
-            comando_valido = true;
-
-        }
-
-        else if (comando_help == 'L'){
-            comando_valido = true;
+        else if (comandoHelp == 'V'){
+            comandoValido = true;
 
         }
 
-        else if (comando_help == 'R'){
+        else if (comandoHelp == 'L'){
+            comandoValido = true;
+
+        }
+
+        else if (comandoHelp == 'R'){
             std::cout<< "Bem vindo às regras do REVERSI!" << endl;
             std::cout<< "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << endl;
             std::cout<< "Regras para colocar peças: PAra fazer uma jogada  válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente;" << endl;
@@ -131,17 +131,17 @@ void menuHelp(){
             std::cout<< "Dica: seja estratéico, pense nos possívies movimentos do seu oponente,";
             std::cout<< "lembre que, para ganhar, o que importa é o tabuleiro final!" << endl;
 
-            comando_valido = true;
+            comandoValido = true;
 
         }
 
-        else if (comando_help == 'D'){
-            comando_valido = true;
+        else if (comandoHelp == 'D'){
+            comandoValido = true;
 
         }
 
-        else if (comando_help == 'O'){
-            comando_valido = true;
+        else if (comandoHelp == 'O'){
+            comandoValido = true;
 
         }
 
