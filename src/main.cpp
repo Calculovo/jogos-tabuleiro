@@ -27,6 +27,26 @@ void imprimirOpcoesDeJogos() {
     std::cout << "M - Voltar ao Menu Principal." << std::endl << std::endl;
 }
 
+void imprimirInstrucoes(char comandoJogo) {
+    switch (comandoJogo) {
+        case cDAMAS:
+            std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço, sendo a coordenada de origem seguida da coordenada de destino." << std::endl;
+            std::cout << "Exemplos: A2B3, C6D5" << std::endl;
+        break;
+
+        case cRAPOSA:
+            std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço."<< std::endl;
+            std::cout << "Para mover a raposa, deve ser digitada somente a coordenada de origem. Exemplos: A1, C3" << std::endl;
+            std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl;
+        break;
+
+        default:
+        std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
+        break;
+    }
+    std::cout << "Digite o comando ENCERRAR para terminar o jogo a qualquer momento." << std::endl << std::endl;
+}
+
 void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
     string apelido1, apelido2;
     bool jogadorValido = false;
@@ -101,22 +121,8 @@ void menuPartida(Placar& placar){
             
             escolherJogador(jogador1, jogador2, placar);
 
-            switch (comandoJogo) {
-                case cDAMAS:
-                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço, sendo a coordenada de origem seguida da coordenada de destino" << std::endl;
-                    std::cout << "Exemplos: A2B3, C6D5" << std::endl;
-                break;
-
-                case cRAPOSA:
-                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
-                    std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl;
-                break;
-
-                default:
-                std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
-                break;
-            }
-            std::cout << "Digite o comando ENCERRAR para terminar o jogo a qualquer momento." << std::endl << std::endl;
+            imprimirInstrucoes(comandoJogo);
+            
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
             placar.escreverArquivo();
@@ -228,7 +234,6 @@ int main() {
                 std::cout << "Digite o apelido do jogador a ser removido: ";
                 getline (cin, apelido);
                 std::cout << std::endl;
-
                 placar.removerJogador(apelido);
                 std::cout << std::endl;
                 break;
@@ -255,7 +260,7 @@ int main() {
                 return 0;
 
             default:
-                std::cout << "ERRO: Comando inválido." << std::endl;
+                std::cout << "ERRO: Comando inválido." << std::endl << std::endl;
                 break;
         }
     }
