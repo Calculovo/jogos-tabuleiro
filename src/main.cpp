@@ -146,12 +146,12 @@ void menuHelp(){
 
             case cVELHA:
                 comandoValido = true;
-                std::cout << "Regras a serem escritas" << std::endl;
+                std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             case cLIG4:
                 comandoValido = true;
-                std::cout << "Regras a serem escritas" << std::endl;
+                std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             case cREVERSI:
@@ -168,16 +168,16 @@ void menuHelp(){
 
             case cDAMAS:
                 comandoValido = true;
-                std::cout << "Regras a serem escritas" << std::endl;
+                std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             case cRAPOSA:
                 comandoValido = true;
-                std::cout << "Regras a serem escritas" << std::endl;
+                std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             default:
-                std::cout << "ERRO: Comando inválido." << std::endl;
+                std::cout << "ERRO: Comando inválido." << std::endl << std::endl;
                 break;
         }
     }
@@ -239,7 +239,6 @@ int main() {
                 std::cout << "Como deseja listar os jogadores?" << std::endl;
                 std::cout << "A - Por apelido;" << std::endl;
                 std::cout << "N - Por nome;" << std::endl << std::endl;
-                std::cout << "Digite sua escolha: ";
                 coletaCaracter(modo);
 
                 placar.listarJogadores(modo);
