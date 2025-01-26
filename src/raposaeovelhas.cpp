@@ -50,7 +50,9 @@ char RaposaeOvelhas::validarJogada(std::string input) {
         }
     }
 
-    if (turno == PLAYER_1){
+    return (realizarJogada(origem, destino));
+
+    /*if (turno == PLAYER_1){
         if (moverRaposa(origem, destino)) {
             this->switchTurno();
             return VALID_PLAY;
@@ -69,8 +71,7 @@ char RaposaeOvelhas::validarJogada(std::string input) {
             std::cout << "A ovelha só se movimenta diagonalmente e para frente, em um quadrado de distância." << std::endl;
         }
     }
-    return LOGIC_ERROR;
-
+    return LOGIC_ERROR;*/
 }
 
 int RaposaeOvelhas::testarVitoria() {
@@ -112,6 +113,29 @@ int RaposaeOvelhas::testarVitoria() {
 
 void RaposaeOvelhas::imprimirTabuleiro() {
     tabuleiro->imprimirTabuleiro();
+}
+
+char RaposaeOvelhas::realizarJogada(Coord origem, Coord destino) {
+    if (turno == PLAYER_1){
+        if (moverRaposa(origem, destino)) {
+            this->switchTurno();
+            return VALID_PLAY;
+        }
+        else{
+            std::cout << "A raposa só se movimenta diagonalmente, em um quadrado de distância." << std::endl;
+        }
+    } 
+    
+    else if (turno == PLAYER_2) {
+        if (moverOvelha(origem, destino)) {
+            this->switchTurno();
+            return VALID_PLAY;
+        }
+        else{
+            std::cout << "A ovelha só se movimenta diagonalmente e para frente, em um quadrado de distância." << std::endl;
+        }
+    }
+    return LOGIC_ERROR;
 }
 
 bool RaposaeOvelhas::moverRaposa(Coord origem, Coord destino) {
