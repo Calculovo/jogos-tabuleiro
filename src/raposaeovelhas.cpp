@@ -82,6 +82,11 @@ int RaposaeOvelhas::testarVitoria() {
             i++;
         }
         if (tabuleiro->lerPeca(Coord(j, i)) == 'O') {
+            for(int k=j; k<8; k++){
+                if (tabuleiro->lerPeca(Coord(k, i)) == 'X'){
+                    return PLAYER_1;
+                }
+            }
             break;
         }
         else if (tabuleiro->lerPeca(Coord(j, i)) == 'X') {

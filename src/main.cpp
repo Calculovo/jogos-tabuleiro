@@ -39,7 +39,7 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
             jogadorValido = true;
         }
         else {
-        std::cout << "ERRO: Jogador não existe." << std::endl;
+        std::cout << "ERRO: Jogador não existe." << std::endl << std::endl;
         }
     }
     jogadorValido = false;
@@ -103,20 +103,20 @@ void menuPartida(Placar& placar){
 
             switch (comandoJogo) {
                 case cDAMAS:
-                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço, sendo a coordenada de origem seguida da de destino" << std::endl;
-                    std::cout << "Exemplos: A2B3, C6D5" << std::endl << std::endl;
+                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço, sendo a coordenada de origem seguida da coordenada de destino" << std::endl;
+                    std::cout << "Exemplos: A2B3, C6D5" << std::endl;
                 break;
 
                 case cRAPOSA:
                     std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
-                    std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl << std::endl;
+                    std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl;
                 break;
 
                 default:
-                std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl << std::endl;
+                std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
                 break;
             }
-
+            std::cout << "Digite o comando ENCERRAR para terminar o jogo a qualquer momento." << std::endl << std::endl;
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
             placar.escreverArquivo();
