@@ -93,14 +93,13 @@ void menuPrincipal() {
 }
 
 void menuPartida(Placar& placar){
-    bool comandoValido = false;
+    bool comandoValido = true;
     if (placar.numeroDeJogadores() < 2) {
         std::cout << "ERRO: quantidade de jogadores insuficiente." << std::endl;
         std::cout << "São necessários, no mínimo, dois jogadores cadastrados para iniciar uma partida." << std::endl << std::endl;
         return;
     }
-    while (!comandoValido){
-            
+    do{
         char comandoJogo;
         
         std::string apelido_p1, apelido_p2;
@@ -111,11 +110,10 @@ void menuPartida(Placar& placar){
         coletaCaracter(comandoJogo);
 
         if (comandoJogo == 'M'){
-            comandoValido = true;
+            break;
         }
 
         else if (comandosExistentes.find(comandoJogo) != std::string::npos){
-            comandoValido = true;
             Jogador* jogador1 = NULL;
             Jogador* jogador2 = NULL;
             
@@ -129,16 +127,16 @@ void menuPartida(Placar& placar){
         }
         
         else {
-            std::cout << "ERRO: Comando inválido." << std::endl;
+            comandoValido = false;
+            std::cout << "ERRO: Comando inválido." << std::endl << std::endl;
         }
-    }
+    } while (!comandoValido);
 }
 
 void menuHelp(){
-    bool comandoValido = false;
+    bool comandoValido = true;
 
-    while (!comandoValido){
-        
+    do{
         char comandoHelp;
         std::cout << "Deseja ler as regras de qual jogo?" << std::endl << std::endl;
         imprimirOpcoesDeJogos();
@@ -147,16 +145,13 @@ void menuHelp(){
 
         switch (comandoHelp) {
             case 'M':
-                comandoValido = true;
                 break;
 
             case cVELHA:
-                comandoValido = true;
                 std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             case cLIG4:
-                comandoValido = true;
                 std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
@@ -169,24 +164,22 @@ void menuHelp(){
                 std::cout << "Dica: seja estratégico, pense nos possíveis movimentos do seu oponente, ";
                 std::cout << "lembre que, para ganhar, o que importa é o tabuleiro final!" << std::endl << std::endl;
 
-                comandoValido = true;
                 break;
 
             case cDAMAS:
-                comandoValido = true;
                 std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             case cRAPOSA:
-                comandoValido = true;
                 std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             default:
+                comandoValido = false;
                 std::cout << "ERRO: Comando inválido." << std::endl << std::endl;
                 break;
         }
-    }
+    } while (!comandoValido);
 }
 
 int main() {
