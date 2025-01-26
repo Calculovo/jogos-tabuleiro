@@ -56,7 +56,7 @@ void Placar::escreverArquivo() const {
         }
     }
     savefile.close();
-    std::cout << "Estatisticas salvas!" << std::endl;
+    std::cout << "Estatisticas salvas!" << std::endl << std::endl;
     return;
 };
 
@@ -89,7 +89,7 @@ void Placar::removerJogador(std::string apelido) {
         std::cout << "Jogador " << apelido << " removido com sucesso." << std::endl;
         return;
     }
-    std::cout << "ERRO: Jogador " << apelido << "nao existe." << std::endl;
+    std::cout << "ERRO: Jogador " << apelido << " nao existe." << std::endl;
 };
 
 bool ordenarJogadoresPorApelido(const Jogador& first, const Jogador& second) {

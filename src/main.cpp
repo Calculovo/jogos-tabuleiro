@@ -27,13 +27,14 @@ void imprimirOpcoesDeJogos() {
     std::cout << "M - Voltar ao Menu Principal." << std::endl << std::endl;
 }
 
-void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido_p1, std::string apelido_p2, Placar& placar){
+void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
+    string apelido1, apelido2;
     bool jogadorValido = false;
     while (!jogadorValido){
         std::cout << "Digite o apelido do Jogador 1: ";
-        getline(cin, apelido_p1);
+        getline(cin, apelido1);
         std::cout << std::endl;
-        jogador1 = placar.buscarJogador(apelido_p1);
+        jogador1 = placar.buscarJogador(apelido1);
         if (jogador1 != nullptr){
             jogadorValido = true;
         }
@@ -44,18 +45,18 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, std::string apelido
     jogadorValido = false;
     while (!jogadorValido){
         std::cout << "Digite o apelido do Jogador 2: ";
-        getline(cin, apelido_p2);
+        getline(cin, apelido2);
         std::cout << std::endl;
-        if (apelido_p2 == apelido_p1){
-            std::cout << "ERRO: Jogador já selecionado." << std::endl;
+        if (apelido2 == apelido1){
+            std::cout << "ERRO: Jogador já selecionado." << std::endl << std::endl;
         }
         else {
-            jogador2 = placar.buscarJogador(apelido_p2);
+            jogador2 = placar.buscarJogador(apelido2);
             if (jogador2 != nullptr){
                 jogadorValido = true;
             }
             else {
-            std::cout << "ERRO: Jogador não existe." << std::endl;
+            std::cout << "ERRO: Jogador não existe." << std::endl << std::endl;
             }
         }
     }
@@ -71,7 +72,7 @@ void menuPrincipal() {
     std::cout << "S - Sair." << std::endl << std::endl;
 }
 
-void menuPartida(Placar placar){
+void menuPartida(Placar& placar){
     bool comandoValido = false;
     if (placar.numeroDeJogadores() < 2) {
         std::cout << "ERRO: quantidade de jogadores insuficiente." << std::endl;
@@ -97,8 +98,25 @@ void menuPartida(Placar placar){
             comandoValido = true;
             Jogador* jogador1 = NULL;
             Jogador* jogador2 = NULL;
+            
+            escolherJogador(jogador1, jogador2, placar);
 
-            escolherJogador(jogador1, jogador2, apelido_p1, apelido_p2, placar);
+            switch (comandoJogo) {
+                case cDAMAS:
+                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço, sendo a coordenada de origem seguida da de destino" << std::endl;
+                    std::cout << "Exemplos: A2B3, C6D5" << std::endl << std::endl;
+                break;
+
+                case cRAPOSA:
+                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
+                    std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl << std::endl;
+                break;
+
+                default:
+                std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl << std::endl;
+                break;
+            }
+
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
             placar.escreverArquivo();
@@ -143,7 +161,7 @@ void menuHelp(){
                 std::cout << "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << std::endl;
                 std::cout << "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio." << std::endl;
                 std::cout << "Dica: seja estratégico, pense nos possíveis movimentos do seu oponente, ";
-                std::cout << "lembre que, para ganhar, o que importa é o tabuleiro final!" << std::endl;
+                std::cout << "lembre que, para ganhar, o que importa é o tabuleiro final!" << std::endl << std::endl;
 
                 comandoValido = true;
                 break;
@@ -169,7 +187,7 @@ int main() {
     Placar placar;
 
     std::cout << "Seja bem-vindo ao Fliperama!" << std::endl << std::endl;
-    std::cout << "Prepare-se para mergulhar no mundo dos jogos clássicos de tabuleiro!" <<
+    std::cout << "Prepare-se para mergulhar no mundo dos jogos clássicos de tabuleiro! " <<
     "Aqui, você pode jogar e se divertir com o Jogo da Velha, Reversi, Raposa e Ovelhas, Ligue 4 e Damas." << std::endl;
     std::cout << "Se você não conhece ou quer relembrar as regras de algum jogo, não se preocupe!" << 
     "Nosso programa oferece um guia completo para as regras de cada jogo. Basta consultá-las antes de começar." << std::endl << std::endl;
@@ -193,7 +211,7 @@ int main() {
 
             case 'C': {
                 std::string nome, apelido;
-                std::cout << "Digite o apelido do novo jogador: ";
+                std::cout << "Digite o apelido do novo jogador, em letras minúsculas: ";
                 getline (cin, apelido);
                 std::cout << std::endl;
                 std::cout << "Digite o nome do novo jogador: ";
@@ -234,7 +252,7 @@ int main() {
                 break;
 
             case 'S':
-                std::cout << "Obrigado por jogar!" << std::endl;
+                std::cout << "Obrigado por jogar!" << std::endl << std::endl;
                 return 0;
 
             default:
