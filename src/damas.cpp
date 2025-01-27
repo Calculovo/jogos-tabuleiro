@@ -17,7 +17,7 @@ Damas::Damas() : JogoBase(8) {
 
 char Damas::validarJogada(std::string input) {
 
-    if (input.size() != 4 /*|| islower(input)*/) {
+    if (input.size() != 4) {
         std::cout << "As coordenadas devem ser digitadas sem espaço, sendo do formato ORIGEMDESTINO. Exemplo: 'B3A4', para ir da casa B3 a A4." 
         << std::endl;
         return SYNTAX_ERROR;
