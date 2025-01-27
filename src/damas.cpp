@@ -154,6 +154,8 @@ bool Damas::jogoTrancado() {
 }
 
 bool Damas::temMovimentosValidos(Coord posicao, char peca) {
+    if (peca == 'x' || peca =='o') return true;
+
     int direcoes[4][2] = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
     for (auto& d : direcoes) {
         Coord vizinho = posicao + Coord(d[0], d[1]);
