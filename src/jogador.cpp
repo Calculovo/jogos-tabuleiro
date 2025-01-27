@@ -79,7 +79,7 @@ const char* nomes[5] = {
     "RAPOSA ",
 };
 
-int Jogador::getResultados(char jogo, int resultado) const {
+int Jogador::getResultados(int jogo, int resultado) const {
     return resultados[jogo][resultado];
 }
 

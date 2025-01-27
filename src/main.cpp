@@ -27,6 +27,26 @@ void imprimirOpcoesDeJogos() {
     std::cout << "M - Voltar ao Menu Principal." << std::endl << std::endl;
 }
 
+void imprimirInstrucoes(char comandoJogo) {
+    switch (comandoJogo) {
+        case cDAMAS:
+            std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço, sendo a coordenada de origem seguida da coordenada de destino." << std::endl;
+            std::cout << "Exemplos: A2B3, C6D5" << std::endl;
+        break;
+
+        case cRAPOSA:
+            std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço."<< std::endl;
+            std::cout << "Para mover a raposa, deve ser digitada somente a coordenada de destino. Exemplos: A1, C3" << std::endl;
+            std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl;
+        break;
+
+        default:
+        std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
+        break;
+    }
+    std::cout << "Digite o comando ENCERRAR para terminar o jogo a qualquer momento." << std::endl << std::endl;
+}
+
 void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
     string apelido1, apelido2;
     bool jogadorValido = false;
@@ -73,14 +93,13 @@ void menuPrincipal() {
 }
 
 void menuPartida(Placar& placar){
-    bool comandoValido = false;
+    bool comandoValido = true;
     if (placar.numeroDeJogadores() < 2) {
         std::cout << "ERRO: quantidade de jogadores insuficiente." << std::endl;
         std::cout << "São necessários, no mínimo, dois jogadores cadastrados para iniciar uma partida." << std::endl << std::endl;
         return;
     }
-    while (!comandoValido){
-            
+    do{
         char comandoJogo;
         
         std::string apelido_p1, apelido_p2;
@@ -91,48 +110,33 @@ void menuPartida(Placar& placar){
         coletaCaracter(comandoJogo);
 
         if (comandoJogo == 'M'){
-            comandoValido = true;
+            break;
         }
 
         else if (comandosExistentes.find(comandoJogo) != std::string::npos){
-            comandoValido = true;
             Jogador* jogador1 = NULL;
             Jogador* jogador2 = NULL;
             
             escolherJogador(jogador1, jogador2, placar);
 
-            switch (comandoJogo) {
-                case cDAMAS:
-                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço, sendo a coordenada de origem seguida da coordenada de destino" << std::endl;
-                    std::cout << "Exemplos: A2B3, C6D5" << std::endl;
-                break;
-
-                case cRAPOSA:
-                    std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
-                    std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl;
-                break;
-
-                default:
-                std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
-                break;
-            }
-            std::cout << "Digite o comando ENCERRAR para terminar o jogo a qualquer momento." << std::endl << std::endl;
+            imprimirInstrucoes(comandoJogo);
+            
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
             placar.escreverArquivo();
         }
         
         else {
-            std::cout << "ERRO: Comando inválido." << std::endl;
+            comandoValido = false;
+            std::cout << "ERRO: Comando inválido." << std::endl << std::endl;
         }
-    }
+    } while (!comandoValido);
 }
 
 void menuHelp(){
-    bool comandoValido = false;
+    bool comandoValido = true;
 
-    while (!comandoValido){
-        
+    do{
         char comandoHelp;
         std::cout << "Deseja ler as regras de qual jogo?" << std::endl << std::endl;
         imprimirOpcoesDeJogos();
@@ -141,46 +145,52 @@ void menuHelp(){
 
         switch (comandoHelp) {
             case 'M':
-                comandoValido = true;
                 break;
 
             case cVELHA:
-                comandoValido = true;
                 std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             case cLIG4:
-                comandoValido = true;
                 std::cout << "Regras a serem escritas" << std::endl << std::endl;
                 break;
 
             case cREVERSI:
                 std::cout << "Bem vindo às regras do REVERSI!" << std::endl;
                 std::cout << "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << std::endl;
-                std::cout << "Regras para colocar peças: Para fazer uma jogada válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente;" << std::endl;
+                std::cout << "Regras para colocar peças: Para fazer uma jogada válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente." << std::endl;
                 std::cout << "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << std::endl;
-                std::cout << "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio." << std::endl;
-                std::cout << "Dica: seja estratégico, pense nos possíveis movimentos do seu oponente, ";
+                std::cout << "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio;" << std::endl;
+                std::cout << "Dica: seja estratégico, pense nos possíveis movimentos do seu oponente,";
                 std::cout << "lembre que, para ganhar, o que importa é o tabuleiro final!" << std::endl << std::endl;
 
-                comandoValido = true;
                 break;
 
             case cDAMAS:
-                comandoValido = true;
-                std::cout << "Regras a serem escritas" << std::endl << std::endl;
+                std::cout << "Regras do jogo DAMAS:" << std::endl;
+                std::cout << "Objetivo: comer todas as peças inimigas antes que ele coma todas as suas. As peças do jogador 1 são representadas por 'X' e a dos jogador 2 por 'O'." << std::endl;
+                std::cout << "Regras de movimento da DAMAS: Normalmente, você pode se mover apenas uma casa na diagonal para frente. Caso exista uma peça inimiga a ser comida, você vai poder se mover para a casa após a peça inimiga na diagonal dela." << std::endl;
+                std::cout << "Caso uma peça sua chegue ao lado oposto do tabuleiro, ela vira uma peça coroa. Peças coroas normalmente conseguem se mover 1 casa na diagonal para trás e para frente." << std::endl;
+                std::cout << "No cenário onde existe uma peça inimiga na diagonal de uma peça coroa, independentemente da distância, estando todas as casas na diagonal entre a coroa e a peça inimiga livres, a peça coroa consegue comer a peça inimiga." << std::endl;
                 break;
 
             case cRAPOSA:
-                comandoValido = true;
-                std::cout << "Regras a serem escritas" << std::endl << std::endl;
+                std::cout << "Regras do jogo RAPOSA E OVELHAS:" << std::endl;
+                std::cout << "Trata-se de um jogo de tabuleiro assimétrico onde o jogador 1 move uma única raposa, representada por 'X', e o jogador 2 consegue mover 4 ovelhas, representadas por 'O';" << std::endl;
+                std::cout << "Regras de movimento da RAPOSA: se move diagonalmente, em um quadrado de distância, tanto para frente quanto para trás;" << std::endl;
+                std::cout << "Regras de movimento das OVELHAS: se movem diagonalmente, em um quadrado de distância, somente para a frente;" << std::endl;
+                std::cout << "Objetivo das OVELHAS: encurralar a raposa, impedindo seu movimento;" << std::endl;
+                std::cout << "Objetivo da RAPOSA: ultrapassar as ovelhas, ou seja, chegar em uma posição onde não haja mais ovelhas nas linhas acima dela;" << std::endl;
+                std::cout << "Observação: NÃO existem capturas neste jogo." << std::endl <<std::endl;
+
                 break;
 
             default:
+                comandoValido = false;
                 std::cout << "ERRO: Comando inválido." << std::endl << std::endl;
                 break;
         }
-    }
+    } while (!comandoValido);
 }
 
 int main() {
@@ -228,7 +238,6 @@ int main() {
                 std::cout << "Digite o apelido do jogador a ser removido: ";
                 getline (cin, apelido);
                 std::cout << std::endl;
-
                 placar.removerJogador(apelido);
                 std::cout << std::endl;
                 break;
@@ -255,7 +264,7 @@ int main() {
                 return 0;
 
             default:
-                std::cout << "ERRO: Comando inválido." << std::endl;
+                std::cout << "ERRO: Comando inválido." << std::endl << std::endl;
                 break;
         }
     }

@@ -66,10 +66,10 @@ char Reversi::existeJogadaLegal() {
 }
 
 
-char Reversi::validarJogada(std::string input) {
+char Reversi::checarJogadaLegal(std::string input) {
         if (input.size() != 2) {
                 std::cout << "Entrada inválida." << std::endl;
-                return LOGIC_ERROR;
+                return SYNTAX_ERROR;
         }
 
         int x = input[0] - 'A';
@@ -95,13 +95,13 @@ char Reversi::validarJogada(std::string input) {
 };
 
 
-void Reversi::colocarPeca(std::string input){
+char Reversi::validarJogada(std::string input){
         if (existeJogadaLegal() == INVALID) {
                 std::cout << "Fim de jogo. Não há mais jogadas válidas!" << std::endl;
-                return;
+                return INVALID;
         }
 
-        if (validarJogada(input) == VALID_PLAY) {
+        if (checarJogadaLegal(input) == VALID_PLAY) {
                 int x = input[0] - 'A';
                 int y = input[1] - '1';
                 Coord colocar(x, y);
@@ -110,9 +110,11 @@ void Reversi::colocarPeca(std::string input){
                 tabuleiro->colocarPeca(colocar, turno);
                 inverterPecas(colocar); 
                 switchTurno();
+                return VALID_PLAY;
         } else {
                 std::cout << "Digite uma coordenada válida. Exemplos: A1." << std::endl;
         }
+        return INVALID;
 };
 
 
