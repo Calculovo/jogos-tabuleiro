@@ -3,6 +3,9 @@
 #include "jogobase.hpp"
 #include <iostream>
 
+//!Coleta um único caractere como entrada do usuário.
+//!Se forem dados mais de um caractere como entrada, imprime uma mensagem de erro até que um único caractere seja dado.
+
 void coletaCaracter(char& comando){
     string comandoString;
     do {
@@ -18,6 +21,8 @@ void coletaCaracter(char& comando){
     comando = comandoString[0];
 }
 
+//!Exibe as opções de jogos disponíveis e seus comandos correspondentes.
+
 void imprimirOpcoesDeJogos() {
     std::cout << "V - Jogo da Velha;" << std::endl;
     std::cout << "L - Ligue 4;" << std::endl;
@@ -27,6 +32,8 @@ void imprimirOpcoesDeJogos() {
     std::cout << "M - Voltar ao Menu Principal." << std::endl << std::endl;
 }
 
+//!Exibe instruções específicas sobre como devem ser digitados os inputs do jogo selecionado.
+//!Recebe o comando do jogo escolhido como parâmetro.
 void imprimirInstrucoes(char comandoJogo) {
     switch (comandoJogo) {
         case cDAMAS:
@@ -47,6 +54,8 @@ void imprimirInstrucoes(char comandoJogo) {
     std::cout << "Digite o comando ENCERRAR para terminar o jogo a qualquer momento." << std::endl << std::endl;
 }
 
+//! Solicita ao usuário que selecione dois jogadores cadastrados no placar.
+//! Recebe ponteiros para os jogadores e o placar como parâmetro, por referência.
 void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
     string apelido1, apelido2;
     bool jogadorValido = false;
@@ -82,6 +91,7 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
     }
 }
 
+//!Exibe a lista dos comandos principais do programa
 void menuPrincipal() {
     std::cout << "O que deseja fazer?" << std::endl << std::endl;
     std::cout << "P - Inicar uma nova partida;" << std::endl;
@@ -91,6 +101,14 @@ void menuPrincipal() {
     std::cout << "H - Ler as regras de algum jogo;" << std::endl;
     std::cout << "S - Sair." << std::endl << std::endl;
 }
+
+//! Gerencia o menu de seleção da partida
+/*!
+    Receba o placar como parâmetro por referência.
+    Verifica se há jogadores suficientes. 
+    Se sim, inicia o jogo cujo comando é dado como input pelo usuário, e solicita que escolha os jogadores.
+    Ao final,usa a função placar.escreverArquivo() para atualizar o arquivo do placar de acordo com o resultado da partida.
+*/
 
 void menuPartida(Placar& placar){
     bool comandoValido = true;
@@ -133,6 +151,11 @@ void menuPartida(Placar& placar){
     } while (!comandoValido);
 }
 
+//!Exibe as regras dos jogos
+/*!
+    Pede para o usuário digitar o comando do jogo cujas regras deja ler.
+    Exibe as regras desse jogo.
+*/
 void menuHelp(){
     bool comandoValido = true;
 
@@ -196,6 +219,11 @@ void menuHelp(){
     } while (!comandoValido);
 }
 
+//! Função principal que inicializa o programa e gerencia os menus
+/*!
+    Imprime uma mensagem de boas-vindas que explica o funcionamento do programa
+    incia um loop que que coleta o input do usuário e realiza a ação do comando dado.
+*/
 int main() {
     Placar placar;
 
