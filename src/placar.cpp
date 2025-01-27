@@ -115,8 +115,6 @@ void Placar::listarJogadores(char modo) {
     cout << this->numeroDeJogadores() << " jogadores encontrados." << endl << endl;
     for (Jogador &j: jogadores) {
         j.imprimir();
-        for (char c: j.getNome())
-            cout << c << "\t" << (int) c << endl;
     };
 };
 

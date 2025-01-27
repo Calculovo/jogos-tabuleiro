@@ -1,7 +1,7 @@
 #include <iostream>
 #include "partida.hpp"
 
-Partida::Partida(char comandoJogo, Jogador* jogador1, Jogador* jogador2) : comandoJogo(comandoJogo), jogador1(jogador1), jogador2(jogador2) {
+Partida::Partida(char comandoJogo, Jogador* jogador1, Jogador* jogador2) : jogador1(jogador1), jogador2(jogador2), comandoJogo(comandoJogo) {
 
     switch (comandoJogo) {
         case cVELHA:
