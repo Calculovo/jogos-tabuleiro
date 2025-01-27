@@ -148,7 +148,10 @@ void menuHelp(){
                 break;
 
             case cVELHA:
-                std::cout << "Regras a serem escritas" << std::endl << std::endl;
+                std::cout << "Regras do JOGO DA VELHA:" << std::endl;
+                std::cout << "Objetivo: Colocar três peças da sua cor em uma linha, coluna, ou diagonal. As peças do jogador 1 são representadas por 'X' e as do jogador 2 são representadas por 'O'." << std::endl;
+                std::cout << "Regras para colocar peças: Você só pode colocar peças em espaços em branco do tabuleiro 3x3, e jogadores alternam colocando peças." << std::endl;
+                std::cout << "Se não houver espaços em branco, e nenhum jogador tiver uma linha, coluna, ou diagonal, o jogo é um empate." << std::endl;
                 break;
 
             case cLIG4:
