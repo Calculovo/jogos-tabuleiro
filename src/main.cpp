@@ -158,10 +158,10 @@ void menuHelp(){
             case cREVERSI:
                 std::cout << "Bem vindo às regras do REVERSI!" << std::endl;
                 std::cout << "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << std::endl;
-                std::cout << "Regras para colocar peças: Para fazer uma jogada válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente;" << std::endl;
+                std::cout << "Regras para colocar peças: Para fazer uma jogada válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente." << std::endl;
                 std::cout << "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << std::endl;
-                std::cout << "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio." << std::endl;
-                std::cout << "Dica: seja estratégico, pense nos possíveis movimentos do seu oponente, ";
+                std::cout << "Fim de jogo: o jogo termina quando algum jogador não tiver mais jogadas válidas ou quando o tabuleiro estiver cheio;" << std::endl;
+                std::cout << "Dica: seja estratégico, pense nos possíveis movimentos do seu oponente,";
                 std::cout << "lembre que, para ganhar, o que importa é o tabuleiro final!" << std::endl << std::endl;
 
                 break;
@@ -171,7 +171,14 @@ void menuHelp(){
                 break;
 
             case cRAPOSA:
-                std::cout << "Regras a serem escritas" << std::endl << std::endl;
+                std::cout << "Regras do jogo RAPOSA E OVELHAS:" << std::endl;
+                std::cout << "Trata-se de um jogo de tabuleiro assimétrico onde o jogador 1 move uma única raposa, representada por 'X', e o jogador 2 consegue mover 4 ovelhas, representadas por 'O';" << std::endl;
+                std::cout << "RegraS de movimento da RAPOSA: se move diagonalmente, em um quadrado de distância, tanto para frente quanto para trás;" << std::endl;
+                std::cout << "Regras de movimento das OVELHAS: se movem diagonalmente, em um quadrado de distância, somente para a frente;" << std::endl;
+                std::cout << "Objetivo das OVELHAS: encurralar a raposa, impedindo seu movimento;" << std::endl;
+                std::cout << "Objetivo da RAPOSA: ultrapassar as ovelhas, ou seja, chegar em uma posição onde não haja mais ovelhas nas linhas acima dela;" << std::endl;
+                std::cout << "Observação: NÃO existem capturas neste jogo." << std::endl <<std::endl;
+
                 break;
 
             default:
