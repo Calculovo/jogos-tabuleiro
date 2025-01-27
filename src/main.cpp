@@ -36,7 +36,7 @@ void imprimirInstrucoes(char comandoJogo) {
 
         case cRAPOSA:
             std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço."<< std::endl;
-            std::cout << "Para mover a raposa, deve ser digitada somente a coordenada de origem. Exemplos: A1, C3" << std::endl;
+            std::cout << "Para mover a raposa, deve ser digitada somente a coordenada de destino. Exemplos: A1, C3" << std::endl;
             std::cout << "Para mover uma ovelha, deve ser digitada a coordenada de origem seguida da coordenada de destino. Exemplos: A2B3, D1E2" << std::endl;
         break;
 
