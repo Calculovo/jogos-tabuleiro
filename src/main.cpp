@@ -167,13 +167,17 @@ void menuHelp(){
                 break;
 
             case cDAMAS:
-                std::cout << "Regras a serem escritas" << std::endl << std::endl;
+                std::cout << "Regras do jogo DAMAS:" << std::endl;
+                std::cout << "Objetivo: comer todas as peças inimigas antes que ele coma todas as suas. As peças do jogador 1 são representadas por 'X' e a dos jogador 2 por 'O'." << std::endl;
+                std::cout << "Regras de movimento da DAMAS: Normalmente, você pode se mover apenas uma casa na diagonal para frente. Caso exista uma peça inimiga a ser comida, você vai poder se mover para a casa após a peça inimiga na diagonal dela." << std::endl;
+                std::cout << "Caso uma peça sua chegue ao lado oposto do tabuleiro, ela vira uma peça coroa. Peças coroas normalmente conseguem se mover 1 casa na diagonal para trás e para frente." << std::endl;
+                std::cout << "No cenário onde existe uma peça inimiga na diagonal de uma peça coroa, independentemente da distância, estando todas as casas na diagonal entre a coroa e a peça inimiga livres, a peça coroa consegue comer a peça inimiga." << std::endl;
                 break;
 
             case cRAPOSA:
                 std::cout << "Regras do jogo RAPOSA E OVELHAS:" << std::endl;
                 std::cout << "Trata-se de um jogo de tabuleiro assimétrico onde o jogador 1 move uma única raposa, representada por 'X', e o jogador 2 consegue mover 4 ovelhas, representadas por 'O';" << std::endl;
-                std::cout << "RegraS de movimento da RAPOSA: se move diagonalmente, em um quadrado de distância, tanto para frente quanto para trás;" << std::endl;
+                std::cout << "Regras de movimento da RAPOSA: se move diagonalmente, em um quadrado de distância, tanto para frente quanto para trás;" << std::endl;
                 std::cout << "Regras de movimento das OVELHAS: se movem diagonalmente, em um quadrado de distância, somente para a frente;" << std::endl;
                 std::cout << "Objetivo das OVELHAS: encurralar a raposa, impedindo seu movimento;" << std::endl;
                 std::cout << "Objetivo da RAPOSA: ultrapassar as ovelhas, ou seja, chegar em uma posição onde não haja mais ovelhas nas linhas acima dela;" << std::endl;
