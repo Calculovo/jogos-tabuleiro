@@ -132,8 +132,8 @@ void menuPartida(Placar& placar){
         }
 
         else if (comandosExistentes.find(comandoJogo) != std::string::npos){
-            Jogador* jogador1 = NULL;
-            Jogador* jogador2 = NULL;
+            Jogador* jogador1 = nullptr;
+            Jogador* jogador2 = nullptr;
             
             escolherJogador(jogador1, jogador2, placar);
 
@@ -142,6 +142,9 @@ void menuPartida(Placar& placar){
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
             placar.escreverArquivo();
+
+            delete jogador1;
+            delete jogador2;
         }
         
         else {
@@ -178,11 +181,16 @@ void menuHelp(){
                 break;
 
             case cLIG4:
-                std::cout << "Regras a serem escritas" << std::endl << std::endl;
+                std::cout << "Regras do jogo LIGUE 4:" << std::endl;
+                std::cout << "Objetivo: alinhar quatro peças da sua cor em linha reta, seja na horizontal, vertical ou diagonal." << std::endl;
+                std::cout << "Regras para colocar peças: A cada jogada, você deve escolher uma coluna para colocar sua peça. A peça irá cair até a posição mais baixa disponível dentro dessa coluna." << std::endl;
+                std::cout << "A partida é jogada por dois jogadores, alternadamente, e cada jogador deve tentar bloquear o oponente enquanto tenta alinhar suas próprias peças." << std::endl;
+                std::cout << "Fim de jogo: O jogo termina quando um jogador conseguir alinhar quatro peças consecutivas ou quando todas as células do tabuleiro estiverem preenchidas (empate)." << std::endl;
+                std::cout << "Dica: Fique atento tanto ao seu objetivo de alinhar 4 peças quanto às possíveis ameaças do seu oponente!" << std::endl << std::endl;
                 break;
 
             case cREVERSI:
-                std::cout << "Bem vindo às regras do REVERSI!" << std::endl;
+                std::cout << "Regras do jogo REVERSI:" << std::endl;
                 std::cout << "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << std::endl;
                 std::cout << "Regras para colocar peças: Para fazer uma jogada válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente." << std::endl;
                 std::cout << "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << std::endl;
@@ -223,6 +231,7 @@ void menuHelp(){
 /*!
     Imprime uma mensagem de boas-vindas que explica o funcionamento do programa
     incia um loop que que coleta o input do usuário e realiza a ação do comando dado.
+
 */
 int main() {
     Placar placar;
