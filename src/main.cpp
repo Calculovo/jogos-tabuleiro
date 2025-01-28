@@ -63,7 +63,7 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
         std::cout << "Digite o apelido do Jogador 1: ";
         getline(cin, apelido1);
         std::cout << std::endl;
-        jogador1 = placar.buscarJogador(apelido1);
+        jogador1 = &*placar.buscarJogador(apelido1);
         if (jogador1 != nullptr){
             jogadorValido = true;
         }
@@ -80,7 +80,7 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
             std::cout << "ERRO: Jogador já selecionado." << std::endl << std::endl;
         }
         else {
-            jogador2 = placar.buscarJogador(apelido2);
+            jogador2 = &*placar.buscarJogador(apelido2);
             if (jogador2 != nullptr){
                 jogadorValido = true;
             }
