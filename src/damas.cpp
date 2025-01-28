@@ -17,10 +17,20 @@ Damas::Damas() : JogoBase(8) {
 
 char Damas::validarJogada(std::string input) {
 
-    if (input.size() != 4) {
-        std::cout << "As coordenadas devem ser digitadas sem espaço, sendo do formato ORIGEMDESTINO. Exemplo: 'B3A4', para ir da casa B3 a A4." 
-        << std::endl;
+    try {
+        if (input.size() != 4) throw std::invalid_argument("As coordenadas devem ser digitadas sem espaço, sendo do formato ORIGEMDESTINO. Exemplo: 'B3A4', para ir da casa B3 a A4.");
+    }
+    catch (const std::invalid_argument& e) {
+        std::cerr << e.what() << std::endl;
         return SYNTAX_ERROR;
+    }
+    catch (const std::logic_error& e) {
+        std::cerr << e.what() << std::endl;
+        return LOGIC_ERROR;
+    }
+    catch (...) {
+        std::cerr << "Erro desconhecido na checagem da jogada." << std::endl;
+        return INVALID;
     }
 
     Coord origem = input.substr(0, 2);
@@ -28,31 +38,35 @@ char Damas::validarJogada(std::string input) {
 
     char peca = tabuleiro->lerPeca(origem);
 
-    if (tolower(peca) != tolower(getTurno())) {
-        std::cout << "A coordenada de origem não possui uma peça do jogador da vez." << std::endl;
+    try {
+        if (tolower(peca) != tolower(getTurno())) throw std::logic_error("A coordenada de origem não possui uma peça do jogador da vez.");
+        if (not tabuleiro->posicaoValida(origem) || not tabuleiro->posicaoValida(destino)) throw std::logic_error("A coordenada de origem ou de destino não existe no tabuleiro.");
+    }
+    catch (const std::logic_error& e) {
+        std::cerr << e.what() << std::endl;
         return LOGIC_ERROR;
     }
-    if (not tabuleiro->posicaoValida(origem) || not tabuleiro->posicaoValida(destino)) {
-        std::cout << "A coordenada de origem ou de destino não existe no tabuleiro." << std::endl;
-        return LOGIC_ERROR;
+    catch (...) {
+        std::cerr << "Erro desconhecido na checagem da jogada." << std::endl;
+        return INVALID;
     }
 
     int dx = destino.getX() - origem.getX();
     int dy = destino.getY() - origem.getY();
 
-    if (destino == origem) {
-        std::cout << "A peça não pode se mover para a casa de origem." << std::endl;
-        return LOGIC_ERROR;
-    }
-    
-    if (tabuleiro->lerPeca(destino) != VAZIO) {
-        std::cout << "Há uma peça nessa casa." << std::endl;
-        return LOGIC_ERROR;
-    }
+    try {
+        if (destino == origem) throw std::logic_error("A peça não pode se mover para a casa de origem.");
+        if (tabuleiro->lerPeca(destino) != VAZIO) throw std::logic_error("Há uma peça nessa casa.");
 
-    if (destino.getX() == origem.getX() || abs(dx) != abs(dy)) {
-        std::cout << "Nesse caso, peça só se move na diagonal e a um quadrado de distância." << std::endl;
+        if (destino.getX() == origem.getX() || abs(dx) != abs(dy)) throw std::logic_error("Nesse caso, peça só se move na diagonal e a um quadrado de distância.");        
+    }
+    catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
         return LOGIC_ERROR;
+    }
+    catch (...) {
+        std::cerr << "Erro desconhecido na checagem da jogada." << std::endl;
+        return INVALID;
     }
 
     if (peca == 'x' || peca == 'o') {
