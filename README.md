@@ -18,7 +18,7 @@ O problema envolve a implementação de uma série de jogos de tabuleiro, permit
 O problema foi abordado usando os conceitos de programação aprendidos durante esse semestre, como o uso de classes, construtores, destrutores, tratamento de exceções, smart pointers, dentre outros. Os detalhes de como essas ferramentas foram implementadas podem ser vistos no arquivo doxygen.
 
 ## Dificuldades encontradas
-A maior dificuldade econtrada foi dominar o funcionamento do sistema git e seus comandos, principalmente a funcionalidade de diferentes branchs para manter a organização das diferentes versões do código. Além disso, no jogo de Damas, em específico, foi deveras complicado implementar a função da peça coroa, dado a quantidade de possibilidades de movimento (ou de não movimento) nos diferentes cenários em que as peças poderiam se encontrar. No Reversi, a implementação da checagem da existênci de jogadas legais em todas as direções também se mostrou um obstáculo.
+A maior dificuldade econtrada foi dominar o funcionamento do sistema git e seus comandos, principalmente a funcionalidade de diferentes branchs para manter a organização das diferentes versões do código. Além disso, no jogo de Damas, em específico, foi deveras complicado implementar a função da peça coroa, dado a quantidade de possibilidades de movimento (ou de não movimento) nos diferentes cenários em que as peças poderiam se encontrar. No Reversi, a implementação da checagem da existência de jogadas legais em todas as direções também se mostrou um obstáculo.
 
 
 ## Extras
