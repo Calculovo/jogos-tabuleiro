@@ -110,6 +110,7 @@ void Placar::listarJogadores(char modo) {
             break;
         default:
             cout << "Modo de listar desconhecido." << endl;
+            return;
             break;
     }
     cout << this->numeroDeJogadores() << " jogadores encontrados." << endl << endl;
