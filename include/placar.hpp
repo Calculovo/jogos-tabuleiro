@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 
+//! Classe responsável por manter os jogadores e suas estatísticas.
 class Placar {
     private:
         //! Lista de jogadores registrados.
