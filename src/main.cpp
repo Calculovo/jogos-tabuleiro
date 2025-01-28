@@ -132,8 +132,8 @@ void menuPartida(Placar& placar){
         }
 
         else if (comandosExistentes.find(comandoJogo) != std::string::npos){
-            Jogador* jogador1 = NULL;
-            Jogador* jogador2 = NULL;
+            Jogador* jogador1 = nullptr;
+            Jogador* jogador2 = nullptr;
             
             escolherJogador(jogador1, jogador2, placar);
 
@@ -142,6 +142,9 @@ void menuPartida(Placar& placar){
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
             placar.escreverArquivo();
+
+            delete jogador1;
+            delete jogador2;
         }
         
         else {
@@ -188,7 +191,7 @@ void menuHelp(){
                 break;
 
             case cREVERSI:
-                std::cout << "Bem vindo às regras do REVERSI!" << std::endl;
+                std::cout << "Regras do jogo REVERSI:" << std::endl;
                 std::cout << "Objetivo: ter o maior número de peças da sua cor viradas pra cima ao fim da partida." << std::endl;
                 std::cout << "Regras para colocar peças: Para fazer uma jogada válida você deve colocar uma peça de forma que vire, pelo menos, uma peça do seu oponente." << std::endl;
                 std::cout << "As peças podem ser viradas na vertical, horizontal e diagonal ao mesmo tempo, desde que haja uma peça sua cercando as peças do seu oponente na direção;" << std::endl;
@@ -229,6 +232,7 @@ void menuHelp(){
 /*!
     Imprime uma mensagem de boas-vindas que explica o funcionamento do programa
     incia um loop que que coleta o input do usuário e realiza a ação do comando dado.
+
 */
 int main() {
     Placar placar;
