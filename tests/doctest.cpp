@@ -1,4 +1,4 @@
-#include "doctest.h"
+#include "include/doctest.h"
 #include "jogodavelha.hpp"
 
 //! Teste para a validação das jogadas
