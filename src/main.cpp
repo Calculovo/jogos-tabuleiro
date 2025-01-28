@@ -178,7 +178,6 @@ void menuHelp(){
                 break;
 
             case cLIG4:
-                case cLIGUE4:
                 std::cout << "Bem-vindo às regras do LIGUE 4!" << std::endl;
                 std::cout << "Objetivo: alinhar quatro peças da sua cor em linha reta, seja na horizontal, vertical ou diagonal." << std::endl;
                 std::cout << "Regras para colocar peças: A cada jogada, você deve escolher uma coluna para colocar sua peça. A peça irá cair até a posição mais baixa disponível dentro dessa coluna." << std::endl;
