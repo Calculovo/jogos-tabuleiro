@@ -1,4 +1,4 @@
-# jogos-tabuleiro
+# Jogos de tabuleiro
 Conjunto de jogos de tabuleiro. Trabalho final de PDS II.
 
 Linguagem do progama: C++
@@ -9,7 +9,7 @@ Requisitos de hardware:
 - Memória RAM: Qualquer memória RAM da atualidade.
 - Armazenamento: Apenas o básico, para conseguir gerar o .tsv dos saves dos jogadores.
 - Sistema operacional: Qualquer um que tenha suporte para a linguagem C++.
-Ambiente de execução: À preferência do usuário. Qualquer ambiente em que você consiga compilar e executar programas. De preferência, Linux.
+- Ambiente de execução: À preferência do usuário. Qualquer ambiente em que você consiga compilar e executar programas. De preferência, Linux.
 
 ## Problema
 O problema envolve a implementação de uma série de jogos de tabuleiro, permitindo que o usuário jogue através do terminal. Há um sistema de cadastro e remoção de jogadores individuais com apelidos e nomes únicos atribuídos a cada usuário. Ademais, os dados dos jogadores, bem como seus resultados em cada jogo são salvos em um placar que pode ser acessadi a qualquer momento. Os jogos incluídos são: Reversi, Ligue4, Jogo da Velha, Raposa e Ovelhas e Damas.
@@ -22,3 +22,4 @@ A maior dificuldade econtrada foi dominar o funcionamento do sistema git e seus 
 
 
 ## Extras
+Além dos requerimentos básicos passados para o projeto, optamos por fazer como extra a implementação de mais dois jogos de tabuleiro fora os listados: Damas e Raposa e Ovelhas. Ambos contam com um sistema de movimentação levemente diferenciado dos outros jogos. As regras de todos os jogos podem ser acessadas diretamente no menu principal.
