@@ -32,7 +32,7 @@ void Partida::jogar() {
         std::cout << "Vez do jogador ";
         std::cout << (jogo->getTurno() == PLAYER_1 ? "1 (X)" : "2 (O)") << ":" << std::endl;
         getline(cin, input);
-        if (input == "ENCERRAR") return;
+        if (input == "S") return;
         jogo->validarJogada(input);
     }
     jogo->imprimirTabuleiro();
