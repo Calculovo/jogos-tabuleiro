@@ -3,6 +3,7 @@
 
 #include "jogobase.hpp"
 
+//! Classe que implementa o jogo da velha.
 class JogoDaVelha : public JogoBase {
     public:
         //! Construtor padrão. Inicializa um Jogo Da Velha 3x3.
