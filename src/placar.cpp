@@ -109,7 +109,8 @@ void Placar::listarJogadores(char modo) {
             jogadores.sort(ordenarJogadoresPorNome);
             break;
         default:
-            throw std::range_error("Modo desconhecido.");
+            cout << "Modo de listar desconhecido." << endl;
+            return;
             break;
     }
     cout << this->numeroDeJogadores() << " jogadores encontrados." << endl << endl;

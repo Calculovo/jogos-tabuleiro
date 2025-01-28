@@ -181,12 +181,13 @@ void menuHelp(){
                 break;
 
             case cLIG4:
-                std::cout << "Regras do jogo LIGUE 4:" << std::endl;
+                std::cout << "Bem-vindo às regras do LIGUE 4!" << std::endl;
                 std::cout << "Objetivo: alinhar quatro peças da sua cor em linha reta, seja na horizontal, vertical ou diagonal." << std::endl;
                 std::cout << "Regras para colocar peças: A cada jogada, você deve escolher uma coluna para colocar sua peça. A peça irá cair até a posição mais baixa disponível dentro dessa coluna." << std::endl;
                 std::cout << "A partida é jogada por dois jogadores, alternadamente, e cada jogador deve tentar bloquear o oponente enquanto tenta alinhar suas próprias peças." << std::endl;
                 std::cout << "Fim de jogo: O jogo termina quando um jogador conseguir alinhar quatro peças consecutivas ou quando todas as células do tabuleiro estiverem preenchidas (empate)." << std::endl;
                 std::cout << "Dica: Fique atento tanto ao seu objetivo de alinhar 4 peças quanto às possíveis ameaças do seu oponente!" << std::endl << std::endl;
+
                 break;
 
             case cREVERSI:

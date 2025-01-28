@@ -10,11 +10,21 @@ class Placar {
         //! Lista de jogadores registrados.
         std::list<Jogador> jogadores;
     public:
-        //! Inicializa o placar. Se existe um arquivo stats.tsv, lê esse arquivo.
+        //! Inicializa o placar.
+        /*!
+            Se o arquivo stats.tsv é encontrado, lê esse arquivo para recuperar estatísticas.
+            Se o arquivo não é encontrado, o placar é inicializado em branco.
+        */
         Placar();
-        //! Destrutor. Garante que as estatísticas não serão perdidas.
+        //! Destrutor. Garante que as estatísticas não serão perdidas
+        /*!
+            Para garantir que as estatísticas não serão perdidas, chama escreverArquivo().
+        */
         ~Placar();
         //! Escreve as estatísticas no arquivo stats.tsv.
+        /*!
+            O arquivo lista apelido e nome de cada jogador, seguido de linhas de três valores (vitórias, empates e derrotas) em cada jogo.
+        */
         void escreverArquivo() const;
         //! Adiciona um jogador quando dado seu nome e apelido.
         /*!
@@ -32,7 +42,7 @@ class Placar {
         /*!
             Se modo é 'A', usa o apelido para ordenar os jogadores.
             Se modo é 'N', usa o nome para ordenar os jogadores.
-            Se modo é qualquer outro char, imprime mensagem de erro.
+            Se modo é qualquer outro char, imprime uma mensagem de erro.
             Após ordenar a lista, imprime nome, apelido e estatísticas de cada jogador.
         */
         void listarJogadores(char modo);
