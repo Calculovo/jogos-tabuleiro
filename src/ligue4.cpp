@@ -6,13 +6,13 @@ Ligue4::Ligue4() : JogoBase(7, 6) {
 }
 
 char Ligue4::validarJogada(std::string input) {
-    int coluna = input[0] - 'A'; // Converte a entrada para o índice da coluna
+    int coluna = input[0] - 'A'; //! Converte a entrada para o índice da coluna
     if (coluna < 0 || coluna >= tabuleiro->getLargura()) {
         std::cout << "Coluna inválida. Escolha entre A e " << (char)('A' + tabuleiro->getLargura() - 1) << "." << std::endl;
         return SYNTAX_ERROR;
     }
 
-    // Encontra a primeira posição disponível na coluna
+    //! Encontra a primeira posição disponível na coluna
     for (int linha = tabuleiro->getAltura() - 1; linha >= 0; --linha) {
         Coord posicao(coluna, linha);
         if (tabuleiro->lerPeca(posicao) == VAZIO) {
@@ -37,7 +37,7 @@ bool Ligue4::verificarSequencia(Coord inicio, Coord direcao, char peca) {
 }
 
 int Ligue4::testarVitoria() {
-    // Verifica linhas, colunas e diagonais
+    //! Verifica linhas, colunas e diagonais
     for (int y = 0; y < tabuleiro->getAltura(); ++y) {
         for (int x = 0; x < tabuleiro->getLargura(); ++x) {
             char peca = tabuleiro->lerPeca(Coord(x, y));
@@ -53,7 +53,7 @@ int Ligue4::testarVitoria() {
         }
     }
 
-    // Verifica empate
+    //! Verifica empate
     for (int x = 0; x < tabuleiro->getLargura(); ++x) {
         if (tabuleiro->lerPeca(Coord(x, 0)) == VAZIO) return INDEFINIDO;
     }
