@@ -9,16 +9,12 @@ Coord::Coord(std::string entrada) {
     int coluna = entrada[0]-'A';
     int linha = entrada[1]-'0';
     if (entrada.size() > 4 or coluna < 0 or coluna > 25 or linha < 0 or linha > 9) {
-        x = INVALID;
-        y = INVALID;
-        return;
+        throw std::invalid_argument("Não está formatada em modo 'A1'.");
     }
     entrada[0] = '0';
     linha = std::stoi(entrada);
     if (linha == 0) {
-        x = INVALID;
-        y = INVALID;
-        return;
+        throw std::invalid_argument("Não pode criar coordenadas com linha zero.");
     }
     x = coluna;
     y = linha-1;
@@ -52,8 +48,7 @@ Tabuleiro::Tabuleiro(Coord coord) :
     t_largura(coord.getX()), 
     t_altura(coord.getY()) {
     if (t_altura > 26 or t_largura > 26 or t_altura < 1 or t_largura < 1) {
-        std::cerr << "Tabuleiros devem ter dimensao entre 1x1 e 26x26." << std::endl;
-        exit(1);
+        throw std::range_error("Tabuleiros devem ter dimensao entre 1x1 e 26x26.");
     }
     t_matriz = new char[t_altura*t_largura];
     for (int i = 0; i < t_largura*t_altura; i++) {
@@ -102,18 +97,23 @@ bool Tabuleiro::posicaoValida(Coord coord) {
     return (0 <= x and x < t_largura and 0 <= y and y < t_altura);
 }
 
-bool Tabuleiro::colocarPeca(Coord coord, char peca) {
-    if (not this->posicaoValida(coord)) return false;
+char* Tabuleiro::acessarCelula(Coord coord) {
+    if (not posicaoValida(coord))
+        throw std::out_of_range("Celula fora do tabuleiro.");
     int indice = coord.getY()*t_largura + coord.getX();
-    if (t_matriz[indice] == peca) return false;
-    t_matriz[indice] = peca;
+    return &(t_matriz[indice]);
+}
+
+bool Tabuleiro::colocarPeca(Coord coord, char peca) {
+    char* posicao = acessarCelula(coord);
+    if (*posicao == peca)
+        return false;
+    *posicao = peca;
     return true;
 }
 
 char Tabuleiro::lerPeca(Coord coord) {
-    if (not this->posicaoValida(coord)) return INVALID;
-    int indice = coord.getY()*t_largura + coord.getX();
-    return t_matriz[indice];
+    return *acessarCelula(coord);
 }
 
 int Tabuleiro::getAltura() {

@@ -26,7 +26,8 @@ class Coord {
         Coord(int x, int y);
         //! Traduz uma string no formato "A1" para uma Coord.
         /*
-            Joga std::invalid_argument se a string não está no formato.
+            Joga std::invalid_argument se a string não está no formato, ou se tenta acessar
+            uma coordenada com linha zero (exemplo, 'B0').
         */
         Coord(std::string entrada);
         //! Retorna a coordenada x.
@@ -56,10 +57,17 @@ class Tabuleiro {
         char* t_matriz;
         //! Imprime uma linha horizontal da largura do tabuleiro.
         void linhaHorizontal();
+        //! Retorna um ponteiro para uma célula específica do tabuleiro.
+        /*!
+            Joga std::out_of_range se a coordenada estiver fora do tabuleiro.
+        */
+        char* acessarCelula(Coord c);
     public:
         //! Cria um tabuleiro com altura e largura especificadas por uma coordenada.
         /*!
-            Tabuleiros são criados inicialmente com todas as células iguais a VAZIO (espaço). 
+            Tabuleiros são criados inicialmente com todas as células iguais a VAZIO (espaço).
+            A medida de um tabuleiro deve ser entre 1 por 1 e 26 por 26. Se não estiver nesses
+            limites, joga std::range_error.
         */
         Tabuleiro(Coord coord);
         //! Destroi um tabuleiro.
