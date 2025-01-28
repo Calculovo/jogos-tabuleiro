@@ -10,21 +10,54 @@
 //! Representa uma jogada que não respeita a formatação de input.
 #define SYNTAX_ERROR 102 
 
+//! Classe pai para a criação de jogos.
 class JogoBase {
     protected:
+        //! Ponteiro para o tabuleiro do jogo.
         Tabuleiro* tabuleiro;
+        //! Variável que conta qual jogador deve jogar no momento.
         char turno;
-    public:
+    public: 
+        //! Constroi um jogo de tamanho arbitrario.
+        /*!
+            Constroi um jogo com um ponteiro para um tabuleiro
+            com a altura e a largura especificada.
+        */
         JogoBase(int largura, int altura);
+        //! Constroi um jogo de tabuleiro quadrado.
+        /*!
+            Chama o primeiro construtor, mas usando o tamanho como altura e largura.
+        */
         JogoBase(int tamanho);
+        //! Destrutor de jogo.
         ~JogoBase();
-        int getLargura(); //obvio
-        int getAltura(); //obvio
-        char getTurno(); //o Jogobase tem uma variavel que conta de quem eh a vez
-        char switchTurno(); //alterna a vez entre Jogador 1 e Jogador 2
-        void virtual imprimirTabuleiro(); //obvio
-        char virtual validarJogada(std::string input) = 0; //input eh o que deve ser lido do terminal, output eh um valor que explica se a jogada eh valida (use o jogo da velha como exemplo)
-        int virtual testarVitoria() = 0; //obvio eu espero
+        //! Retorna a largura do tabuleiro.
+        int getLargura();
+        //! Retorna a altura do tabuleiro.
+        int getAltura();
+        //! Retorna o índice do jogador que deve jogar agora.
+        char getTurno();
+        //! Alterna o turno de jogador 1 para jogador 2 ou vice-versa.
+        char switchTurno();
+        //! Exibe o tabuleiro do jogo.
+        void virtual imprimirTabuleiro();
+        //! Valida e executa uma jogada representada por uma string.
+        /*!
+            Se a string não faz sentido como uma jogada, deve retornar SYNTAX_ERROR.
+            Se a string pode ser interpretada como uma jogada, mas não é uma jogada válida no momento,
+            deve retornar LOGIC_ERROR.
+            Do contrário, deve retornar VALID_PLAY.
+        */
+        char virtual validarJogada(std::string input) = 0;
+        //! Verifica se um dos jogadores já atingiu a condição de vitória.
+        /*!
+            Se um dos jogadores já atingiu a condição de vitória, retorna
+            o respectivo JOGADOR_1 ou JOGADOR_2.
+            Se o jogo empatou, retorna EMPATE.
+            Se nenhum jogador atingiu a condição de vitória, e o jogo ainda
+            não acabou, retorna INDEFINIDO.
+        */
+        int virtual testarVitoria() = 0;
 };
 
 #endif
