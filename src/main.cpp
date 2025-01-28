@@ -51,7 +51,7 @@ void imprimirInstrucoes(char comandoJogo) {
         std::cout << "Lembre-se, as jogadas devem ser digitadas em letra maíuscula e sem espaço. Exemplos: A1, C3" << std::endl;
         break;
     }
-    std::cout << "Digite o comando ENCERRAR para terminar o jogo a qualquer momento." << std::endl << std::endl;
+    std::cout << "Digite o comando S para sair do jogo a qualquer momento." << std::endl << std::endl;
 }
 
 //! Solicita ao usuário que selecione dois jogadores cadastrados no placar.
