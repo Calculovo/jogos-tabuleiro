@@ -42,7 +42,7 @@ class Placar {
         /*!
             Se modo é 'A', usa o apelido para ordenar os jogadores.
             Se modo é 'N', usa o nome para ordenar os jogadores.
-            Se modo é qualquer outro char, joga uma exceção.
+            Se modo é qualquer outro char, imprime uma mensagem de erro.
             Após ordenar a lista, imprime nome, apelido e estatísticas de cada jogador.
         */
         void listarJogadores(char modo);
