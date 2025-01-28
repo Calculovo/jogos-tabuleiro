@@ -11,7 +11,7 @@ int main() {
         cout << (j.getTurno() == PLAYER_1 ? "1" : "2") << ":" << endl;
         getline(cin, entrada);
 
-        j.colocarPeca(entrada);
+        j.validarJogada(entrada);
     }
     j.imprimirTabuleiro();
     if (j.testarVitoria() == EMPATE) {

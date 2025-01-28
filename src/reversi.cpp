@@ -67,54 +67,72 @@ char Reversi::existeJogadaLegal() {
 
 
 char Reversi::checarJogadaLegal(std::string input) {
-        if (input.size() != 2) {
-                std::cout << "Entrada inválida." << std::endl;
+        try{
+                if (input.size() != 2) {
+                        throw std::invalid_argument("Entrada inválida.");
+                }
+
+                int x = input[0] - 'A';
+                int y = input[1] - '1';
+
+                if (x < 0 || x >= TAM_TABULEIRO || y < 0 || y >= TAM_TABULEIRO) {
+                        throw std::out_of_range("Coordenada fora dos limites do tabuleiro.");
+                }
+
+
+                Coord colocar(x,y);
+
+                if(tabuleiro->lerPeca(colocar) != VAZIO){
+                        throw std::logic_error("Essa coordenada já possui uma peça");
+                }
+                
+                bool jogadaValida = conferirDirecoes(colocar);
+
+
+                return jogadaValida ? VALID_PLAY : INVALID;
+        }catch (const std::invalid_argument& e) {
+                std::cout << e.what() << std::endl;
                 return SYNTAX_ERROR;
-        }
-
-        int x = input[0] - 'A';
-        int y = input[1] - '1';
-
-        if (x < 0 || x >= TAM_TABULEIRO || y < 0 || y >= TAM_TABULEIRO) {
-                std::cout << "Coordenada fora dos limites do tabuleiro." << std::endl;
+        } catch (const std::out_of_range& e) {
+                std::cout << e.what() << std::endl;
                 return LOGIC_ERROR;
-        }
-
-
-        Coord colocar(x,y);
-
-        if(tabuleiro->lerPeca(colocar) != VAZIO){
-                std::cout << "Essa coordenada já possui uma peça" << std::endl;
+        } catch (const std::logic_error& e) {
+                std::cout << e.what() << std::endl;
                 return LOGIC_ERROR;
+        } catch (...) {
+                std::cout << "Erro desconhecido na checagem da jogada." << std::endl;
+                return INVALID;
         }
-        
-        bool jogadaValida = conferirDirecoes(colocar);
-
-
-        return jogadaValida ? VALID_PLAY : INVALID;
 };
 
 
 char Reversi::validarJogada(std::string input){
-        if (existeJogadaLegal() == INVALID) {
-                std::cout << "Fim de jogo. Não há mais jogadas válidas!" << std::endl;
+        try{
+                if (existeJogadaLegal() == INVALID) {
+                        throw std::runtime_error("Fim de jogo. Não há mais jogadas válidas!");
+                }
+
+                if (checarJogadaLegal(input) == VALID_PLAY) {
+                        int x = input[0] - 'A';
+                        int y = input[1] - '1';
+                        Coord colocar(x, y);
+
+
+                        tabuleiro->colocarPeca(colocar, turno);
+                        inverterPecas(colocar); 
+                        switchTurno();
+                        return VALID_PLAY;
+                } else {
+                        std::cout << "Digite uma coordenada válida. Exemplo: A1." << std::endl;
+                        return INVALID;
+                }
+        }catch (const std::runtime_error& e) {
+                std::cout << e.what() << std::endl;
+                return INVALID;
+        } catch (...) {
+                std::cout << "Erro desconhecido ao validar a jogada." << std::endl;
                 return INVALID;
         }
-
-        if (checarJogadaLegal(input) == VALID_PLAY) {
-                int x = input[0] - 'A';
-                int y = input[1] - '1';
-                Coord colocar(x, y);
-
-
-                tabuleiro->colocarPeca(colocar, turno);
-                inverterPecas(colocar); 
-                switchTurno();
-                return VALID_PLAY;
-        } else {
-                std::cout << "Digite uma coordenada válida. Exemplos: A1." << std::endl;
-        }
-        return INVALID;
 };
 
 
