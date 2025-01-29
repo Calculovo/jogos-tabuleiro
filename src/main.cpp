@@ -265,8 +265,11 @@ int main() {
                 std::cout << "Digite o nome do novo jogador: ";
                 getline (cin,nome);
                 std::cout << std::endl;
-
-                placar.adicionarJogador(apelido, nome);
+                try {
+                    placar.adicionarJogador(apelido, nome);
+                } catch (std::exception& erro) {
+                    std::cout << erro.what() << std::endl;
+                }
                 std::cout << std::endl;
                 break;
             }
