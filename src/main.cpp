@@ -142,9 +142,6 @@ void menuPartida(Placar& placar){
             Partida partida(comandoJogo, jogador1, jogador2);
             partida.jogar();
             placar.escreverArquivo();
-
-            delete jogador1;
-            delete jogador2;
         }
         
         else {
