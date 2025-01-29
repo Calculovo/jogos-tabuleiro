@@ -24,11 +24,17 @@ A maior dificuldade econtrada foi dominar o funcionamento do sistema git e seus 
 ## Extras
 Além dos requerimentos básicos passados para o projeto, optamos por fazer como extra a implementação de mais dois jogos de tabuleiro fora os listados: Damas e Raposa e Ovelhas. Ambos contam com um sistema de movimentação levemente diferenciado dos outros jogos. As regras de todos os jogos podem ser acessadas diretamente no menu principal.
 
+# Instruções de Execução
+
+Para compilar o código, utilize o comando `make main`.
+Para iniciar o programa, após compilação, utilize o comando `./main`.
+
 ## Testes  com doctest
 
 O projeto utiliza [doctest](https://github.com/doctest/doctest) para testes automatizados. No nosso projeto em específico utilizamos o doctest para validar o Arquivo tabuleiro_doctest.cpp. Para compilar esse teste em específico pelo doctest, utilize o seguinte comando:
-g++ -std=c++17 -Wall -Wno-unknown-warning-option -Iinclude tests/tabuleiro_doctest.cpp -o test
+`g++ -std=c++17 -Wall -Wno-unknown-warning-option -Iinclude tests/tabuleiro_doctest.cpp -o test`
+[Ou o atalho `make test`]
 Após a compilação, execute os testes com:
-./test
+`./test`
 Para um relatório mais detalhado, utilize a flag --success:
-./test --success
+`./test --success`

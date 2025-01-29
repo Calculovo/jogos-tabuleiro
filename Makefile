@@ -2,10 +2,10 @@ CC := g++
 FLAG := -Wall -std=c++17
 INCL := -I include
 
-all: bin/main
+all: main test
 
-bin/main: obj/main.o obj/damas.o obj/raposaeovelhas.o obj/reversi.o obj/ligue4.o obj/jogodavelha.o obj/placar.o obj/partida.o obj/jogador.o obj/jogobase.o obj/tabuleiro.o
-	$(CC) $(FLAG) obj/main.o obj/damas.o obj/raposaeovelhas.o obj/reversi.o obj/ligue4.o obj/jogodavelha.o obj/placar.o obj/partida.o obj/jogador.o obj/jogobase.o obj/tabuleiro.o -o bin/main
+main: obj/main.o obj/damas.o obj/raposaeovelhas.o obj/reversi.o obj/ligue4.o obj/jogodavelha.o obj/placar.o obj/partida.o obj/jogador.o obj/jogobase.o obj/tabuleiro.o
+	$(CC) $(FLAG) obj/main.o obj/damas.o obj/raposaeovelhas.o obj/reversi.o obj/ligue4.o obj/jogodavelha.o obj/placar.o obj/partida.o obj/jogador.o obj/jogobase.o obj/tabuleiro.o -o main
 
 obj/main.o: src/main.cpp include/partida.hpp obj/partida.o include/placar.hpp obj/placar.o include/jogobase.hpp obj/jogobase.o
 	$(CC) $(FLAG) -c src/main.cpp $(INCL) -o obj/main.o
@@ -77,6 +77,9 @@ bin/teste_ligue4: obj/teste_ligue4.o obj/ligue4.o obj/jogobase.o obj/tabuleiro.o
 	$(CC) $(FLAG) obj/teste_ligue4.o obj/ligue4.o obj/jogobase.o obj/tabuleiro.o -o bin/teste_ligue4
 
 clean:
-	rm -f bin/* obj/*
+	rm -f bin/* obj/* main test
+
+test: tests/tabuleiro_doctest.cpp tabuleiro.o
+	g++ -std=c++17 -Wall -Wno-unknown-warning-option -I include tests/tabuleiro_doctest.cpp -o test
 
 testAll: bin/teste_tabuleiro bin/teste_jogo_da_velha bin/teste_raposa_e_ovelhas bin/teste_damas bin/teste_ligue4 bin/teste_reversi
