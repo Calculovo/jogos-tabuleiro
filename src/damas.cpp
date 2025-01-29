@@ -30,7 +30,7 @@ char Damas::validarJogada(std::string input) {
     }
     catch (...) {
         std::cerr << "Erro desconhecido na checagem da jogada." << std::endl;
-        return INVALID;
+        return INVALID_PLAY;
     }
 
     Coord origem = input.substr(0, 2);
@@ -48,7 +48,7 @@ char Damas::validarJogada(std::string input) {
     }
     catch (...) {
         std::cerr << "Erro desconhecido na checagem da jogada." << std::endl;
-        return INVALID;
+        return INVALID_PLAY;
     }
 
     int dx = destino.getX() - origem.getX();
@@ -66,7 +66,7 @@ char Damas::validarJogada(std::string input) {
     }
     catch (...) {
         std::cerr << "Erro desconhecido na checagem da jogada." << std::endl;
-        return INVALID;
+        return INVALID_PLAY;
     }
 
     if (peca == 'x' || peca == 'o') {

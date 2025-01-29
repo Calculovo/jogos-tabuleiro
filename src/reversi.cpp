@@ -62,7 +62,7 @@ char Reversi::existeJogadaLegal() {
         }
 
         std::cout << "Fim de jogo: Não há mais jogadas válidas!" << std::endl;
-        return INVALID;
+        return INVALID_PLAY;
 }
 
 
@@ -89,7 +89,7 @@ char Reversi::checarJogadaLegal(std::string input) {
                 bool jogadaValida = conferirDirecoes(colocar);
 
 
-                return jogadaValida ? VALID_PLAY : INVALID;
+                return jogadaValida ? VALID_PLAY : INVALID_PLAY;
         }catch (const std::invalid_argument& e) {
                 std::cout << e.what() << std::endl;
                 return SYNTAX_ERROR;
@@ -101,14 +101,14 @@ char Reversi::checarJogadaLegal(std::string input) {
                 return LOGIC_ERROR;
         } catch (...) {
                 std::cout << "Erro desconhecido na checagem da jogada." << std::endl;
-                return INVALID;
+                return INVALID_PLAY;
         }
 };
 
 
 char Reversi::validarJogada(std::string input){
         try{
-                if (existeJogadaLegal() == INVALID) {
+                if (existeJogadaLegal() == INVALID_PLAY) {
                         throw std::runtime_error("Fim de jogo. Não há mais jogadas válidas!");
                 }
 
@@ -124,14 +124,14 @@ char Reversi::validarJogada(std::string input){
                         return VALID_PLAY;
                 } else {
                         std::cout << "Digite uma coordenada válida. Exemplo: A1." << std::endl;
-                        return INVALID;
+                        return INVALID_PLAY;
                 }
         }catch (const std::runtime_error& e) {
                 std::cout << e.what() << std::endl;
-                return INVALID;
+                return INVALID_PLAY;
         } catch (...) {
                 std::cout << "Erro desconhecido ao validar a jogada." << std::endl;
-                return INVALID;
+                return INVALID_PLAY;
         }
 };
 

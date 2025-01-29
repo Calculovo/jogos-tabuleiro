@@ -10,6 +10,10 @@
 //! Representa uma jogada que não respeita a formatação de input.
 #define SYNTAX_ERROR 102 
 
+//substitui o antigo INVALID
+//! Representa uma jogada inválida por motivo desconhecido
+#define INVALID_PLAY -128
+
 //! Classe pai para a criação de jogos.
 class JogoBase {
     protected:

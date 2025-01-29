@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 
+//! Classe responsável por manter os jogadores e suas estatísticas.
 class Placar {
     private:
         //! Lista de jogadores registrados.
@@ -23,18 +24,32 @@ class Placar {
         ~Placar();
         //! Escreve as estatísticas no arquivo stats.tsv.
         /*!
-            O arquivo lista apelido e nome de cada jogador, seguido de linhas de três valores (vitórias, empates e derrotas) em cada jogo.
+            O arquivo lista apelido e nome de cada jogador,
+            seguido de linhas de três valores (vitórias, empates e derrotas) em cada jogo.
         */
         void escreverArquivo() const;
+        //! Verifica se uma string pode ser usada como apelido.
+        /*!
+            Apelidos somente podem utilizar letras minusculas, numerais, e underline('_').
+            Ademais, eles devem ter pelo menos dois caracteres.
+        */
+        bool validarApelido(std::string apelido);
+        //! Verifica se uma string pode ser usada como nome.
+        /*!
+            Nomes somente podem usar caracteres ASCII de texto, não de controle.
+            Ademais, eles devem ter pelo menos dois caracteres.
+        */
+        bool validarNome(std::string nome);
         //! Adiciona um jogador quando dado seu nome e apelido.
         /*!
-            Se um jogador já usa o apelido dado, imprime uma mensagem de erro.
+            Se outro jogador já usa o apelido dado, joga std::range_error.
+            Se o nome ou apelido não é válido, joga std::invalid_argument.
             Do contrário, constrói e adiciona o jogador no final da lista.
         */
         void adicionarJogador(std::string apelido, std::string nome);
         //! Remove um jogador quando dado seu apelido.
         /*!
-            Se nenhum jogador usa o apelido dado, imprime uma mensagem de erro.
+            Se nenhum jogador usa o apelido dado, joga std::invalid_argument.
             Do contrário, constrói e adiciona o jogador no final da lista.
         */
         void removerJogador(std::string apelido);
@@ -42,15 +57,15 @@ class Placar {
         /*!
             Se modo é 'A', usa o apelido para ordenar os jogadores.
             Se modo é 'N', usa o nome para ordenar os jogadores.
-            Se modo é qualquer outro char, imprime uma mensagem de erro.
+            Se modo é qualquer outro char, joga std::invalid_argument.
             Após ordenar a lista, imprime nome, apelido e estatísticas de cada jogador.
         */
         void listarJogadores(char modo);
-        //! Da um ponteiro para o jogador com o ID dado.
+        //! Dá um iterador para o jogador com o ID dado.
         /*!
-            Se o jogador nao existe, retorna nullptr.
+            Se o jogador nao existe, joga std::invalid_argument.
         */
-        Jogador* buscarJogador(std::string apelido);
+        std::list<Jogador>::iterator buscarJogador(std::string apelido);
         //! Retorna a quantidade de jogadores registrados.
         unsigned int numeroDeJogadores();
 };

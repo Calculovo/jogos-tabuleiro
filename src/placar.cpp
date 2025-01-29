@@ -61,35 +61,28 @@ void Placar::escreverArquivo() const {
 };
 
 void Placar::adicionarJogador(std::string apelido, std::string nome) {
-    if (this->buscarJogador(apelido) != nullptr) {
-        std::cout << "ERRO: Jogador " << apelido << " ja existe." << std::endl;
-        return;
-    }
+    try {
+        this->buscarJogador(apelido);
+        throw std::range_error("ERRO: Jogador ja existe.");
+    } catch (std::invalid_argument& p) {/*intencionalmente deixado em branco*/};
     for (char c: apelido) {
         if (('a' <= c and c <= 'z') or ('0' <= c and c <= '9') or (c == '_'))
             continue;
-        std::cout << "ERRO: Apelidos de jogador somente podem usar letras minusculas, numerais, ou underline." << std::endl;
-        return;
+        throw std::invalid_argument("ERRO: Apelidos de jogador somente podem usar letras minusculas, numerais, ou underline.");
     }
     for (char c: nome) {
         if ((' ' <= c and c <= '~'))
             continue;
-        std::cout << "ERRO: Nomes de jogador nao podem usar caracteres de controle." << std::endl;
-        return;
+        throw std::invalid_argument("ERRO: Nomes de jogador nao podem usar caracteres de controle ou fora da ASCII.");
     }
     jogadores.push_back(Jogador(nome, apelido));
     std::cout << "Jogador " << apelido << " cadastrado com sucesso." << std::endl;
 };
 
 void Placar::removerJogador(std::string apelido) {
-    list<Jogador>::iterator j = jogadores.begin();
-    for (; j != jogadores.end(); j++) {
-        if (j->getApelido() != apelido) continue;
-        jogadores.erase(j);
-        std::cout << "Jogador " << apelido << " removido com sucesso." << std::endl;
-        return;
-    }
-    std::cout << "ERRO: Jogador " << apelido << " nao existe." << std::endl;
+    std::list<Jogador>::iterator jogador = this->buscarJogador(apelido);
+    jogadores.erase(jogador);
+    std::cout << "Jogador " << apelido << " removido com sucesso." << std::endl;
 };
 
 bool ordenarJogadoresPorApelido(const Jogador& first, const Jogador& second) {
@@ -119,12 +112,13 @@ void Placar::listarJogadores(char modo) {
     };
 };
 
-Jogador* Placar::buscarJogador(std::string apelido) {
-    for (Jogador& j: jogadores) {
-        if (j.getApelido() != apelido) continue;
-        return &j;
+std::list<Jogador>::iterator Placar::buscarJogador(std::string apelido) {
+    std::list<Jogador>::iterator p = jogadores.begin();
+    while (p != jogadores.end()) {
+        if (p->getApelido() != apelido) p++;
+        else return p;
     }
-    return nullptr;
+    throw std::invalid_argument("ERRO: Jogador não existe.");
 };
 
 unsigned int Placar::numeroDeJogadores() {
