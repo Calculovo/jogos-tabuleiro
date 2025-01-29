@@ -60,21 +60,37 @@ void Placar::escreverArquivo() const {
     return;
 };
 
+bool Placar::validarApelido(std::string apelido) {
+    if (apelido.size() < 2)
+        return false;
+    for (char c: apelido) {
+        if (('a' <= c and c <= 'z') or ('0' <= c and c <= '9') or (c == '_'))
+            continue;
+        return false;
+    }
+    return true;
+};
+
+bool Placar::validarNome(std::string nome) {
+    if (nome.size() < 2)
+        return false;
+    for (char c: nome) {
+        if ((' ' <= c and c <= '~'))
+            continue;
+        return false;
+    }
+    return true;
+};
+
 void Placar::adicionarJogador(std::string apelido, std::string nome) {
     try {
         this->buscarJogador(apelido);
         throw std::range_error("ERRO: Jogador ja existe.");
     } catch (std::invalid_argument& p) {/*intencionalmente deixado em branco*/};
-    for (char c: apelido) {
-        if (('a' <= c and c <= 'z') or ('0' <= c and c <= '9') or (c == '_'))
-            continue;
+    if (not validarApelido(apelido))
         throw std::invalid_argument("ERRO: Apelidos de jogador somente podem usar letras minusculas, numerais, ou underline.");
-    }
-    for (char c: nome) {
-        if ((' ' <= c and c <= '~'))
-            continue;
+    if (not validarNome(nome))
         throw std::invalid_argument("ERRO: Nomes de jogador nao podem usar caracteres de controle ou fora da ASCII.");
-    }
     jogadores.push_back(Jogador(nome, apelido));
     std::cout << "Jogador " << apelido << " cadastrado com sucesso." << std::endl;
 };

@@ -33,13 +33,13 @@ class Placar {
             Apelidos somente podem utilizar letras minusculas, numerais, e underline('_').
             Ademais, eles devem ter pelo menos dois caracteres.
         */
-        bool validarApelido(std::string apelido);
+        static bool validarApelido(std::string apelido);
         //! Verifica se uma string pode ser usada como nome.
         /*!
             Nomes somente podem usar caracteres ASCII de texto, não de controle.
             Ademais, eles devem ter pelo menos dois caracteres.
         */
-        bool validarNome(std::string nome);
+        static bool validarNome(std::string nome);
         //! Adiciona um jogador quando dado seu nome e apelido.
         /*!
             Se outro jogador já usa o apelido dado, joga std::range_error.
