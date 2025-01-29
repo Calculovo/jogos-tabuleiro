@@ -22,6 +22,6 @@ TEST_CASE("Teste de colocar peça") {
     Tabuleiro tab(3, 3);
     CHECK(tab.colocarPeca(0, 0, 'X') == true);
     CHECK(tab.lerPeca(0, 0) == 'X');
-    CHECK(tab.colocarPeca(3, 3, 'O') == false);
-    CHECK((tab.lerPeca(3, 3) == INVALID_PLAY));
+    CHECK_THROWS_AS(tab.colocarPeca(3, 3, 'O'), std::out_of_range);
+    CHECK_THROWS_AS(tab.lerPeca(3, 3), std::out_of_range );
 }

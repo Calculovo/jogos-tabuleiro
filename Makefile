@@ -79,7 +79,7 @@ bin/teste_ligue4: obj/teste_ligue4.o obj/ligue4.o obj/jogobase.o obj/tabuleiro.o
 clean:
 	rm -f bin/* obj/* main test
 
-test: tests/tabuleiro_doctest.cpp tabuleiro.o
+test: tests/tabuleiro_doctest.cpp obj/tabuleiro.o
 	g++ -std=c++17 -Wall -Wno-unknown-warning-option -I include tests/tabuleiro_doctest.cpp -o test
 
 testAll: bin/teste_tabuleiro bin/teste_jogo_da_velha bin/teste_raposa_e_ovelhas bin/teste_damas bin/teste_ligue4 bin/teste_reversi
