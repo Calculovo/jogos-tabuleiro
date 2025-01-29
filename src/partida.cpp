@@ -33,7 +33,11 @@ void Partida::jogar() {
         std::cout << (jogo->getTurno() == PLAYER_1 ? "1 (X)" : "2 (O)") << ":" << std::endl;
         getline(cin, input);
         if (input == "S") return;
-        jogo->validarJogada(input);
+        try {
+            jogo->validarJogada(input);
+        } catch (std::exception& erro) {
+            std::cout << erro.what() << std::endl;
+        }
     }
     jogo->imprimirTabuleiro();
     switch (jogo->testarVitoria()) {
