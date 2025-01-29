@@ -2,7 +2,7 @@
 #include "doctest.h"
 #include "../src/tabuleiro.cpp"
 #include "tabuleiro.hpp"
-#define INVALID_PLAY  -1  // Apenas como exemplo, remova se já estiver no cabeçalho
+#define INVALID_PLAY  -1 
 
 TEST_CASE("Teste de criação do tabuleiro") {
     Tabuleiro tab(3, 3);
