@@ -88,9 +88,9 @@ void Placar::adicionarJogador(std::string apelido, std::string nome) {
         throw std::range_error("ERRO: Jogador ja existe.");
     } catch (std::invalid_argument& p) {/*intencionalmente deixado em branco*/};
     if (not validarApelido(apelido))
-        throw std::invalid_argument("ERRO: Apelidos de jogador somente podem usar letras minusculas, numerais, ou underline.");
+        throw std::invalid_argument("ERRO: Apelidos de jogador somente podem usar letras minusculas, numerais, ou underline, e devem ter pelo menos dois caracteres.");
     if (not validarNome(nome))
-        throw std::invalid_argument("ERRO: Nomes de jogador nao podem usar caracteres de controle ou fora da ASCII.");
+        throw std::invalid_argument("ERRO: Nomes de jogador nao podem usar caracteres de controle ou fora da ASCII, e devem ter pelo menos dois caracteres.");
     jogadores.push_back(Jogador(nome, apelido));
     std::cout << "Jogador " << apelido << " cadastrado com sucesso." << std::endl;
 };
