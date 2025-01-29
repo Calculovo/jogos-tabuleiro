@@ -63,12 +63,11 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
         std::cout << "Digite o apelido do Jogador 1: ";
         getline(cin, apelido1);
         std::cout << std::endl;
-        jogador1 = &*placar.buscarJogador(apelido1);
-        if (jogador1 != nullptr){
+        try {
+            jogador1 = &*placar.buscarJogador(apelido1);
             jogadorValido = true;
-        }
-        else {
-        std::cout << "ERRO: Jogador não existe." << std::endl << std::endl;
+        } catch (std::exception& erro) {
+            std::cout << erro.what() << std::endl;
         }
     }
     jogadorValido = false;
@@ -78,15 +77,13 @@ void escolherJogador(Jogador*& jogador1, Jogador*& jogador2, Placar& placar){
         std::cout << std::endl;
         if (apelido2 == apelido1){
             std::cout << "ERRO: Jogador já selecionado." << std::endl << std::endl;
+            continue;
         }
-        else {
+        try {
             jogador2 = &*placar.buscarJogador(apelido2);
-            if (jogador2 != nullptr){
-                jogadorValido = true;
-            }
-            else {
-            std::cout << "ERRO: Jogador não existe." << std::endl << std::endl;
-            }
+            jogadorValido = true;
+        } catch (std::exception& erro) {
+            std::cout << erro.what() << std::endl;
         }
     }
 }
@@ -279,7 +276,11 @@ int main() {
                 std::cout << "Digite o apelido do jogador a ser removido: ";
                 getline (cin, apelido);
                 std::cout << std::endl;
-                placar.removerJogador(apelido);
+                try {
+                    placar.removerJogador(apelido);
+                } catch (std::exception& erro) {
+                    std::cout << erro.what() << std::endl;
+                }
                 std::cout << std::endl;
                 break;
             }
